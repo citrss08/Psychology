@@ -1,497 +1,289 @@
 
-const units = {
-  investigations: {
-    number: "UNIT 01",
-    title: "Psychological investigations",
-    description: "Understand how psychologists investigate behaviour, collect evidence and evaluate research.",
-    tag: "RESEARCH METHODS",
-    notes: [
-      {
-        title: "What is psychological research?",
-        text: "Psychology uses systematic methods to investigate behaviour and mental processes. Researchers collect evidence, analyse patterns and evaluate explanations rather than relying only on intuition.",
-        definition: "An operational definition explains exactly how a variable is measured or manipulated in a particular study.",
-        why: "Psychological concepts such as stress, intelligence and attraction cannot always be observed directly. Researchers therefore need clear ways to measure them."
-      },
-      {
-        title: "Research methods",
-        text: "Different methods answer different research questions. The method should be selected according to the aim, the variables and the practical and ethical limits of the investigation.",
-        bullets: [
-          "Experiment: manipulates an independent variable to investigate its effect on a dependent variable.",
-          "Observation: systematically records behaviour as it occurs.",
-          "Interview: collects detailed verbal information from participants.",
-          "Questionnaire or survey: gathers responses to a set of questions."
-        ],
-        why: "No single method is suitable for every psychological question. For example, an experiment may investigate a possible causal relationship, while an interview can explore participants' experiences in greater depth."
-      },
-      {
-        title: "Variables and experimental design",
-        text: "The independent variable (IV) is the variable manipulated by the researcher. The dependent variable (DV) is the outcome measured. Extraneous variables are other factors that could influence the results.",
-        bullets: [
-          "Independent groups: different participants take part in each condition.",
-          "Repeated measures: the same participants take part in every condition.",
-          "Matched pairs: participants are paired according to relevant characteristics."
-        ],
-        why: "Researchers need to control other possible explanations. If an extraneous variable changes alongside the IV, it becomes harder to determine what caused the results."
-      },
-      {
-        title: "Sampling and generalisability",
-        text: "A sample is the group of people who participate in a study. The target population is the wider group to which researchers hope to apply their findings.",
-        bullets: [
-          "Opportunity sampling: selecting people who are readily available.",
-          "Volunteer sampling: participants choose to take part.",
-          "Random sampling: each member of the target population has an equal chance of selection."
-        ],
-        why: "A sample that differs substantially from the target population may produce findings that cannot be confidently generalised. Sample size alone does not guarantee representativeness."
-      },
-      {
-        title: "Reliability and validity",
-        text: "Reliability concerns the consistency of a measure or research procedure. Validity concerns whether the research actually measures what it intends to measure.",
-        bullets: [
-          "Test-retest reliability: whether a measure produces consistent results over time.",
-          "Inter-rater reliability: whether different observers record similar results.",
-          "Internal validity: whether the findings support the proposed explanation.",
-          "External validity: whether findings can apply beyond the original study."
-        ],
-        why: "A measure can be reliable without being valid. A scale that consistently gives readings that are too high may be reliable, but it is not accurately measuring the intended value."
-      },
-      {
-        title: "Ethics in psychological research",
-        text: "Researchers have responsibilities towards participants and must consider the possible consequences of their procedures.",
-        bullets: [
-          "Informed consent: participants should understand what participation involves.",
-          "Right to withdraw: participants should be able to leave the study.",
-          "Confidentiality: personal information should be protected.",
-          "Protection from harm: researchers should minimise physical and psychological risk.",
-          "Deception: should be justified and followed by appropriate debriefing."
-        ],
-        why: "Ethical research protects participants and helps maintain public trust in psychology. Scientific value does not automatically justify every research procedure."
-      }
-    ],
-    research: [
-      {
-        title: "Class practical: interview",
-        text: "Health and well-being context. You may use a structured interview, semi-structured interview or focus group. The minimum is one participant for an individual interview, or three to eight participants for a focus group.",
-        evaluation: "Interviews can provide detailed explanations, but interviewer effects and social desirability may influence responses."
-      },
-      {
-        title: "Class practical: observation",
-        text: "Human development context. Observation can be naturalistic or controlled, overt or covert, and participant or non-participant. The minimum is one participant.",
-        evaluation: "Observation can record behaviour in context, but observer bias and the Hawthorne effect may affect findings."
-      },
-      {
-        title: "Class practical: questionnaire",
-        text: "Human relationships context. A survey or questionnaire requires a minimum of ten participants.",
-        evaluation: "Questionnaires can collect standardised responses efficiently, but poorly worded questions and social desirability can reduce validity."
-      },
-      {
-        title: "Class practical: experiment",
-        text: "Learning and cognition context. The experiment can be true or quasi-experimental and requires a minimum of five participants.",
-        evaluation: "Experiments can investigate causal relationships, but artificial settings and uncontrolled variables may limit conclusions."
-      }
-    ],
-    practice: [
-      {
-        question: "Define the term operationalisation. [2 marks]",
-        answer: "Operationalisation is the process of defining a variable in a specific, measurable way. For example, a researcher could operationalise memory performance as the number of words correctly recalled from a list."
-      },
-      {
-        question: "Explain one difference between reliability and validity. [4 marks]",
-        answer: "Reliability refers to the consistency of a measure, whereas validity refers to whether the measure assesses what it is intended to assess. A questionnaire could produce consistent scores every time it is completed, making it reliable, but if its questions do not accurately measure stress, it may lack validity."
-      },
-      {
-        question: "Explain one ethical consideration when conducting an experiment. [4 marks]",
-        answer: "Informed consent requires participants to understand the nature of the study before agreeing to participate. This is important because participants should be able to make a voluntary and informed decision about whether they wish to take part."
-      }
-    ]
-  },
+/* IB Psychology SL 2027 study site
+   Extensive notes and worked answers rewritten from the 11 class PDFs supplied by the student.
+   Where a worksheet names a study but leaves its method/results blank, the site flags that gap
+   rather than inventing details. The notes are paraphrased, not copied verbatim.
+*/
 
-  health: {
-    number: "UNIT 02",
-    title: "Health and well-being",
-    description: "Explore psychological explanations of health, illness, stress and well-being.",
-    tag: "CONTEXT 01",
-    notes: [
+const course = {
+  "investigations": {
+    "number": "UNIT 01",
+    "title": "Psychological investigations",
+    "tag": "METHODS · DATA · CONCEPTS",
+    "description": "How psychologists investigate behaviour: choose a method, collect evidence, interpret findings and evaluate the quality and limits of conclusions.",
+    "groups": [
       {
-        title: "Understanding health and well-being",
-        text: "Health is broader than simply the absence of illness. Psychological research considers physical, mental and social aspects of well-being, as well as how they interact.",
-        definition: "Well-being refers to a person's overall psychological and physical state, including factors such as emotional functioning and life satisfaction.",
-        why: "A person may not have a diagnosed physical illness but may still experience poor psychological well-being. This is why psychological explanations consider more than physical symptoms."
+        "title": "Research methods",
+        "topics": [
+          {
+            "title": "Psychology as an empirical discipline",
+            "definition": "Empirical evidence is information gathered through systematic observation or investigation. Psychological explanations should be based on evidence that can be examined, rather than intuition alone.",
+            "body": "The class notes contrast everyday “naive psychology” with the expectations placed on a psychologist. People make predictions about others all the time, but researchers are expected to use objective, empirical and standardised procedures. The method needs to fit the question being investigated.",
+            "why": "A clear procedure allows other people to understand how a conclusion was reached and to consider whether the evidence supports it.",
+            "evaluation": "Human behaviour is complex and context-dependent. Unlike a fixed physical object, people may respond differently across situations, cultures and time. This makes complete objectivity and universal generalisation difficult.",
+            "terms": [
+              "Empirical evidence",
+              "Objectivity",
+              "Standardisation",
+              "Replication"
+            ],
+            "sections": [
+              {
+                "heading": "From everyday observation to systematic psychology",
+                "body": "People routinely make informal explanations of behaviour: we infer that someone is tired, confident, anxious or unfriendly from what we see. The handout calls this everyday activity “naive psychology”. The difference is not that psychologists are the only people who think about behaviour; it is that psychologists are expected to justify claims through systematic evidence. Empirical evidence is gathered through observation or investigation. A standardised procedure specifies what was done so that the process can be examined and, where appropriate, repeated.",
+                "points": [
+                  "Objectivity means trying to prevent personal expectations from shaping the recording or interpretation of evidence.",
+                  "Standardisation means keeping instructions, materials and procedures consistent where possible.",
+                  "Replication allows other researchers to repeat a procedure and see whether a similar pattern appears.",
+                  "A conclusion should be proportionate to the evidence; an observation is not automatically proof of an explanation."
+                ],
+                "why": "If two people watch the same behaviour but use different definitions, they may reach different conclusions. Operational rules and consistent recording make their judgments more comparable."
+              },
+              {
+                "heading": "Experimental and non-experimental methodologies",
+                "body": "The teacher notes divide research into experimental and non-experimental approaches. In an experiment the researcher manipulates an independent variable and measures a dependent variable. In non-experimental methods, such as observation, surveys, interviews, case studies and correlational research, the researcher does not deliberately manipulate the relevant variable. These methods are still valuable, but they cannot by themselves establish that one variable caused another.",
+                "points": [
+                  "Use an experiment when a controlled manipulation is ethical and practical.",
+                  "Use observation when behaviour itself is the focus and recording it in context is important.",
+                  "Use a questionnaire or interview when the research question concerns attitudes, beliefs or experiences.",
+                  "Use a case study when detailed understanding of an individual or small group is needed."
+                ],
+                "why": "Choosing a method is part of the research question. A method should not be selected simply because it is familiar; it should provide evidence that can answer the particular question."
+              }
+            ]
+          },
+          {
+            "title": "Hypotheses, variables and operationalisation",
+            "definition": "An independent variable (IV) is the variable manipulated by the researcher. A dependent variable (DV) is the outcome measured. Operationalisation means defining a variable in a specific, measurable way.",
+            "body": "An experimental hypothesis predicts how the IV will affect the DV. A directional hypothesis predicts the direction of the difference or relationship; a non-directional hypothesis predicts a difference without specifying its direction. A null hypothesis predicts no significant effect or relationship. The notes emphasise that an experimental IV must have distinct conditions and the DV must be quantifiable.",
+            "why": "Abstract terms such as anxiety, intelligence or aggression cannot be measured consistently until the researcher explains exactly what counts as a score or observation. For example, a concentration DV could be operationalised as the number of correct responses on a timed task.",
+            "example": "From the class example: “People will concentrate better in quiet conditions than in noisy conditions.” IV = sound condition (quiet/noisy); DV = concentration score on the same task.",
+            "terms": [
+              "Independent variable",
+              "Dependent variable",
+              "Operational definition",
+              "Directional hypothesis",
+              "Null hypothesis",
+              "Confounding variable"
+            ],
+            "sections": [
+              {
+                "heading": "Writing an experimental hypothesis",
+                "body": "A hypothesis is a testable prediction. A directional (one-tailed) hypothesis predicts which condition or variable will have the higher or lower score. A non-directional (two-tailed) hypothesis predicts a difference or relationship but does not state its direction. A null hypothesis predicts that there will be no statistically significant difference or relationship. In an experiment, state the IV, the DV, the participants or population where relevant, and how the DV will be measured.",
+                "points": [
+                  "Directional: “Participants who complete the word task in silence will recall more words than participants who complete it with background noise, measured by the number of words correctly recalled.”",
+                  "Non-directional: “There will be a difference in the number of words correctly recalled by participants completing the task in silence and with background noise.”",
+                  "Null: “There will be no statistically significant difference in the number of words correctly recalled between the two sound conditions.”"
+                ],
+                "why": "A specific hypothesis makes it possible to decide what data must be collected and whether the results are consistent with the prediction."
+              },
+              {
+                "heading": "Operationalising variables: worked examples",
+                "body": "Operationalisation converts an abstract idea into a procedure or measure. It must be possible for another researcher to understand what counts as a score or condition. For an IV, describe the separate conditions or categories. For a DV, describe the numerical score or clearly defined behaviour that will be recorded.",
+                "points": [
+                  "Intelligence (DV): score on a named, standardised intelligence test.",
+                  "Anxiety (DV): score on a specified anxiety questionnaire, or number of observable pre-defined anxiety behaviours during a fixed period.",
+                  "Verbal memory (DV): number of words from a 20-word list correctly recalled after a 60-second delay.",
+                  "Extroversion (IV): classify participants into high and low groups using a stated cut-off on an extroversion scale; note that this is a naturally occurring grouping, not a manipulated personality trait.",
+                  "Age (IV): compare pre-defined age categories, such as 10–12 and 13–15 years.",
+                  "Birth order (IV): classify as first-born or later-born, while recognising that family size and spacing may be relevant confounds.",
+                  "Alcohol consumption (IV): compare clearly specified naturally occurring categories of reported consumption; deliberately administering alcohol raises important ethical and safety issues.",
+                  "Type of gamer (IV): define categories using a clear rule, for example the game genre played most often during a stated period."
+                ],
+                "why": "“Measure anxiety” is too vague. A numerical scale or a defined behavioural count makes the DV observable and comparable. A variable such as extroversion cannot simply be assigned like a sound condition; it is normally measured as a participant variable."
+              },
+              {
+                "heading": "Applying the classroom letter task",
+                "body": "In the handout’s activity, participants cross out target letters during a fixed 60-second period, first under one condition and then with a different letter and background noise. The variable changed by the researcher is the task condition. Performance can be recorded as the number of correct target letters found, with errors or omissions also recorded if the scoring rule states this in advance.",
+                "points": [
+                  "Possible IV: sound condition / task version (quiet compared with noise).",
+                  "Possible DV: number of correctly identified target letters in 60 seconds.",
+                  "Keep the time limit, paper layout, instructions, lighting and scoring rule constant.",
+                  "A practice effect may occur because participants have already completed the first task. The task version and order could also affect difficulty."
+                ],
+                "example": "A suitable operationalised hypothesis: “Participants will correctly identify fewer target letters in the 60-second task accompanied by noise than in the quiet condition.”",
+                "evaluation": "If the letters differ in difficulty or if all participants complete the quiet condition first, the effect cannot confidently be attributed only to noise. Counterbalancing task order and using equivalent task sheets can help."
+              }
+            ]
+          },
+          {
+            "title": "True experiments and quasi-experiments",
+            "definition": "A true experiment deliberately manipulates an IV and allocates participants to conditions. In a quasi-experiment, the IV is a naturally occurring difference or category that the researcher cannot directly manipulate.",
+            "body": "Experiments compare conditions to investigate whether changing the IV is associated with a change in the DV. A control condition provides a baseline for comparison; an experimental condition receives the intended IV manipulation. Quasi-experiments can investigate variables that cannot ethically or practically be assigned, such as age or a pre-existing group membership.",
+            "why": "Manipulation and control make experiments the main method for investigating causal relationships. In a quasi-experiment, pre-existing differences between groups may provide alternative explanations, so causal claims are more cautious.",
+            "evaluation": "Strengths: greater control of variables and a clearer test of cause and effect in a well-designed true experiment. Limitations: artificial tasks may reduce ecological validity; demand characteristics and researcher effects may influence behaviour; quasi-experiments lack random allocation and are harder to interpret causally.",
+            "terms": [
+              "True experiment",
+              "Quasi-experiment",
+              "Experimental condition",
+              "Control condition",
+              "Random allocation"
+            ],
+            "sections": [
+              {
+                "heading": "Laboratory, field and natural experiments",
+                "body": "The handout compares experiments partly by the degree of control and the setting. Laboratory experiments take place in a controlled environment, often allowing close control of procedure and extraneous variables. Field experiments manipulate an IV in a real-life setting, which may make behaviour more natural but can make variables harder to control. Natural experiments use an event or naturally occurring condition that the researcher does not create; they are often quasi-experimental because the IV is not randomly assigned.",
+                "points": [
+                  "Laboratory: stronger control and often easier replication; may be artificial and less representative of everyday behaviour.",
+                  "Field: behaviour may be more natural; outside influences are harder to control and informed consent may be more complicated.",
+                  "Natural / quasi: useful when a variable cannot be manipulated ethically or practically; pre-existing differences limit causal conclusions."
+                ],
+                "why": "The setting creates a trade-off. Greater control can strengthen internal validity, while a more natural environment may improve ecological validity."
+              },
+              {
+                "heading": "Causality and the limits of quasi-experiments",
+                "body": "In a true experiment, participants can be randomly allocated to conditions after the researcher manipulates an IV. Random allocation helps distribute participant differences across conditions. In a quasi-experiment the groups already exist or the IV is naturally occurring, so the groups may differ in other ways before the study begins.",
+                "points": [
+                  "A study comparing people who already identify as introverts and extroverts is quasi-experimental if personality group is the IV.",
+                  "A study comparing existing age groups is quasi-experimental.",
+                  "The researcher may measure a naturally occurring difference, but cannot claim to have randomly assigned participants to become older or to have a particular personality."
+                ],
+                "why": "If one group performs differently, the difference may be due to the group characteristic, another participant variable, or a combination. Causal language must therefore be cautious."
+              }
+            ]
+          },
+          {
+            "title": "Experimental designs",
+            "definition": "An experimental design describes how participants experience the conditions of an experiment.",
+            "body": "Independent groups: different participants take part in each condition. Repeated measures: the same participants complete every condition. Matched pairs: participants are paired on relevant characteristics and one member of each pair takes part in each condition.",
+            "why": "The design affects participant variables, order effects, practice, fatigue and the number of participants required.",
+            "evaluation": "Independent groups avoid order effects, but differences between participants may affect results. Repeated measures control individual differences, but practice or fatigue may occur; counterbalancing can help. Matched pairs reduce some participant differences but matching is time-consuming and cannot control every individual difference.",
+            "terms": [
+              "Independent groups",
+              "Repeated measures",
+              "Matched pairs",
+              "Order effects",
+              "Counterbalancing",
+              "Participant variables"
+            ],
+            "sections": [
+              {
+                "heading": "Choosing a participant design",
+                "body": "The three designs in the handout are independent groups, repeated measures and matched pairs. The choice affects the number of participants needed and the kinds of unwanted effects that must be considered.",
+                "points": [
+                  "Independent groups: each participant completes only one condition. This avoids order effects, but participant differences can create noise or bias.",
+                  "Repeated measures: each participant completes all conditions. This controls many individual differences, but practice, fatigue or carry-over effects may influence later conditions. Counterbalancing changes the order across participants.",
+                  "Matched pairs: participants are paired on important characteristics and split across conditions. This can reduce some group differences, but careful matching takes time and cannot make two people identical."
+                ],
+                "example": "For a quiet-versus-noisy concentration experiment, a repeated-measures design allows each person to act as their own comparison. The order should be counterbalanced and equivalent concentration tasks should be used to reduce practice effects.",
+                "why": "No design is automatically best. The researcher must identify the most likely source of bias and choose a design or control procedure that addresses it."
+              }
+            ]
+          },
+          {
+            "title": "Confounding variables, demand characteristics and blinding",
+            "definition": "A confounding variable changes alongside the IV and offers an alternative explanation for the DV. Demand characteristics are cues that may reveal the aim of a study and influence how participants behave.",
+            "body": "Extraneous variables are factors other than the IV that might affect the DV. Researchers try to standardise procedures and control important variables. Experimenter bias occurs when a researcher’s expectations influence the research process. A single-blind procedure withholds relevant information from participants; a double-blind procedure also prevents the researcher interacting with participants from knowing the condition or hypothesis.",
+            "why": "If participants guess what the researcher expects, or the researcher unintentionally treats groups differently, the results may reflect these influences rather than the IV.",
+            "terms": [
+              "Extraneous variable",
+              "Confounding variable",
+              "Demand characteristics",
+              "Experimenter bias",
+              "Single blind",
+              "Double blind"
+            ]
+          },
+          {
+            "title": "Observations",
+            "definition": "Observational research focuses on systematically recording freely chosen behaviour. The researcher does not manipulate an independent variable.",
+            "body": "Observations can be naturalistic or controlled, overt or covert, and participant or non-participant. Naturalistic observation records behaviour in its usual environment. Controlled observation takes place in a more structured setting. Overt observation means participants know they are being observed; covert observation means they do not. Participant observers join the group; non-participant observers do not.",
+            "why": "Observation is useful when the aim is to understand what people actually do, rather than only what they say they do. The design affects naturalness, control and ethical responsibilities.",
+            "evaluation": "Naturalistic observation can have ecological validity but offers limited control. Controlled observation can make behaviours easier to compare but may be less natural. Covert observation may reduce reactivity but raises consent and privacy concerns. Observer bias and inter-rater reliability are important considerations.",
+            "terms": [
+              "Naturalistic",
+              "Controlled",
+              "Overt",
+              "Covert",
+              "Participant observer",
+              "Non-participant observer",
+              "Observer bias",
+              "Inter-rater reliability"
+            ],
+            "sections": [
+              {
+                "heading": "Recording behaviour systematically",
+                "body": "A coding frame defines the behaviours to be recorded and how they will be counted. An event sample records particular behaviours whenever they occur. A time sample records behaviour at set intervals. A pilot observation can reveal whether categories are clear and whether observers can apply them consistently.",
+                "points": [
+                  "Operationalise each behaviour so observers know exactly what to record.",
+                  "Use clear categories that are distinct enough to avoid double-counting.",
+                  "Train observers and compare their records to check inter-rater reliability.",
+                  "Keep a record of the setting, duration and procedure so the observation can be evaluated."
+                ],
+                "why": "Without clear coding rules, the same behaviour might be recorded differently by different observers. This weakens reliability and can introduce observer bias."
+              }
+            ]
+          },
+          {
+            "title": "Surveys, questionnaires and interviews",
+            "definition": "Questionnaires and surveys use a standard set of questions to collect responses. Interviews collect information through a verbal interaction, with different levels of structure.",
+            "body": "Structured interviews use predetermined questions in a fixed order. Semi-structured interviews use a guide but allow follow-up questions. Focus groups collect discussion from a small group. Questions may be open-ended or closed-ended. Wording, order and the social situation can affect the responses participants provide.",
+            "why": "These methods can investigate experiences and attitudes that cannot be directly observed. However, self-report information may be affected by memory, social desirability and interpretation of the questions.",
+            "evaluation": "Closed questions are easier to quantify and compare but may restrict responses. Open questions provide detail but require coding and interpretation. Interviews can clarify meaning but interviewer effects may influence answers. Focus groups can generate discussion but dominant participants may shape what others say.",
+            "terms": [
+              "Structured interview",
+              "Semi-structured interview",
+              "Focus group",
+              "Open-ended question",
+              "Closed-ended question",
+              "Social desirability"
+            ]
+          },
+          {
+            "title": "Correlational studies",
+            "definition": "A correlation examines the relationship between two measured variables without manipulating either one.",
+            "body": "A positive correlation means that as one variable increases, the other tends to increase. A negative correlation means that as one variable increases, the other tends to decrease. A zero or weak correlation indicates little or no linear relationship. The correlation coefficient describes the direction and strength of a relationship.",
+            "why": "Correlational research can reveal patterns and support prediction, especially when manipulation is impractical or unethical. It cannot establish causality because a third variable or reverse direction may explain the relationship.",
+            "evaluation": "Correlations can help identify variables for further research, but researchers must avoid claiming that one variable causes the other. A scatterplot can help show direction, strength, clusters and outliers.",
+            "terms": [
+              "Positive correlation",
+              "Negative correlation",
+              "Zero correlation",
+              "Correlation coefficient",
+              "Third variable problem"
+            ]
+          },
+          {
+            "title": "Case studies, triangulation and idiographic research",
+            "definition": "A case study is an in-depth investigation of an individual or small group, drawing on several sources of information.",
+            "body": "A case study may include interviews, observations, school or medical records, psychometric tests, physiological measures, diaries and family reports. Triangulation means using more than one method, source or perspective to investigate the same issue. The handout contrasts nomothetic research, which seeks broader patterns across groups, with idiographic research, which focuses on the distinctive details of individuals.",
+            "why": "Detailed case material can reveal complex or unusual experiences that broad surveys may miss. Using several sources can help check whether accounts converge or contradict one another.",
+            "evaluation": "Case studies provide rich detail and may generate new hypotheses, but small or unusual samples cannot automatically be generalised. Retrospective accounts and researcher interpretation can also introduce bias.",
+            "terms": [
+              "Case study",
+              "Triangulation",
+              "Nomothetic",
+              "Idiographic",
+              "Qualitative data",
+              "Quantitative data"
+            ]
+          }
+        ]
       },
       {
-        title: "The biological approach",
-        text: "The biological approach explains behaviour and mental processes through biological mechanisms, including brain structures, neurotransmitters, hormones and genetic influences.",
-        bullets: [
-          "Neurotransmitters transmit signals between neurons.",
-          "Hormones are chemical messengers released by endocrine glands.",
-          "Genetic factors may contribute to individual differences.",
-          "Brain structures can be associated with particular functions."
-        ],
-        why: "Biological explanations can help identify mechanisms involved in health and behaviour. However, they may overlook social environments and individual experiences."
-      },
-      {
-        title: "The cognitive approach",
-        text: "The cognitive approach focuses on mental processes such as attention, memory, interpretation and thinking. It examines how people process information and how this can influence behaviour.",
-        why: "Two people may interpret the same situation differently. Their interpretations can influence emotional responses and the decisions they make."
-      },
-      {
-        title: "The sociocultural approach",
-        text: "The sociocultural approach investigates how social relationships, cultural expectations, group membership and wider environments influence behaviour.",
-        why: "Health-related behaviour does not occur in isolation. Family expectations, social norms and access to resources can all influence individual choices."
-      },
-      {
-        title: "Evaluating explanations",
-        text: "A strong psychological explanation should be considered in relation to evidence from more than one perspective.",
-        bullets: [
-          "Biological explanations may identify underlying mechanisms.",
-          "Cognitive explanations may explain interpretations and decision-making.",
-          "Sociocultural explanations may explain environmental and social influences."
-        ],
-        why: "A multi-level explanation can provide a more complete account than assuming that one factor explains every person's experience."
-      }
-    ],
-    research: [
-      {
-        title: "Example: stress and biological responses",
-        text: "Research into stress may investigate physiological responses, including hormonal activity and changes in the body's stress-response systems.",
-        evaluation: "Biological measures can provide objective data, although they do not necessarily explain how a person interprets or experiences stress."
-      },
-      {
-        title: "Example: cognitive interpretations",
-        text: "Researchers may investigate how interpretations of challenging situations relate to emotional responses and coping behaviour.",
-        evaluation: "Self-report measures can provide access to personal experiences, but participants may not always report their thoughts accurately."
-      },
-      {
-        title: "Example: social influences on health",
-        text: "Research may explore how family, peers, cultural expectations and social environments influence health-related behaviour.",
-        evaluation: "Social research can explain environmental influences, but it can be difficult to isolate the contribution of one factor."
-      }
-    ],
-    practice: [
-      {
-        question: "Explain one way in which the biological approach can contribute to understanding health and well-being. [4 marks]",
-        answer: "The biological approach investigates how physiological mechanisms may influence health. For example, researchers may investigate the role of hormones in the body's response to stress. This can help explain how biological processes are associated with changes in behaviour and physical functioning."
-      },
-      {
-        question: "Discuss how two psychological approaches could explain health-related behaviour. [6 marks]",
-        answer: "The cognitive approach could explain health-related behaviour through the way individuals interpret information and make decisions. The sociocultural approach could explain how social norms, family expectations and cultural environments influence those decisions. Together, these approaches show that behaviour may be influenced by both individual thought processes and the surrounding social environment."
-      }
-    ]
-  },
-
-  development: {
-    number: "UNIT 03",
-    title: "Human development",
-    description: "Investigate psychological change and continuity throughout human development.",
-    tag: "CONTEXT 02",
-    notes: [
-      {
-        title: "What is human development?",
-        text: "Human development concerns changes in behaviour, thinking, emotion and social functioning over time. Researchers investigate both continuity and change throughout the lifespan.",
-        definition: "Development refers to changes in psychological characteristics and behaviour across time.",
-        why: "Understanding development helps psychologists distinguish between abilities that remain relatively stable and those that change with age, experience or environment."
-      },
-      {
-        title: "Biological influences on development",
-        text: "Biological development includes changes in the brain, nervous system and hormonal activity. Genetic factors may also contribute to individual differences.",
-        why: "Biological maturation can influence what individuals are able to do at different stages of development. However, development is not determined by biology alone."
-      },
-      {
-        title: "Cognitive development",
-        text: "Cognitive development concerns changes in mental processes such as memory, language, reasoning, attention and problem-solving.",
-        why: "Cognitive abilities can change as the brain matures and as individuals gain experience. Researchers therefore investigate how thinking develops over time."
-      },
-      {
-        title: "Social and cultural influences",
-        text: "Family relationships, education, peers and cultural environments can influence developmental experiences.",
-        why: "Individuals grow up in different environments. These differences can shape opportunities, expectations and the experiences that influence development."
-      },
-      {
-        title: "Nature and nurture",
-        text: "Nature refers to biological and genetic influences, while nurture refers to environmental and experiential influences.",
-        why: "Nature and nurture interact. It is often misleading to treat development as the result of only genes or only environment."
-      }
-    ],
-    research: [
-      {
-        title: "Class practical: observation",
-        text: "For the human development context, your class practical uses observation. You may use naturalistic or controlled observation, and different observer roles.",
-        evaluation: "Observations can record behaviour as it occurs, but the presence of an observer or the interpretation of behaviour may influence the data."
-      },
-      {
-        title: "Longitudinal research",
-        text: "A longitudinal design studies the same participants over an extended period of time.",
-        evaluation: "It can reveal patterns of change within individuals, but participant attrition and time demands may be limitations."
-      },
-      {
-        title: "Cross-sectional research",
-        text: "A cross-sectional design compares different groups at a particular point in time.",
-        evaluation: "It can be quicker than longitudinal research, but differences between age groups may reflect cohort effects rather than developmental change."
-      }
-    ],
-    practice: [
-      {
-        question: "Explain the difference between nature and nurture. [4 marks]",
-        answer: "Nature refers to biological influences, including genetic factors, while nurture refers to environmental influences and experiences. For example, an individual's development may be influenced by inherited characteristics as well as their family, education and social environment."
-      },
-      {
-        question: "Evaluate the use of a longitudinal design in developmental research. [6 marks]",
-        answer: "A strength of longitudinal research is that the same participants are studied over time, allowing researchers to examine patterns of individual change. However, participants may drop out, creating attrition bias. The design can also require substantial time and resources, making it difficult to conduct."
-      }
-    ]
-  },
-
-  relationships: {
-    number: "UNIT 04",
-    title: "Human relationships",
-    description: "Explore how psychological processes and social environments influence relationships.",
-    tag: "CONTEXT 03",
-    notes: [
-      {
-        title: "Understanding human relationships",
-        text: "Human relationships include social connections between individuals and groups. Psychology investigates how relationships form, develop and influence behaviour.",
-        why: "Relationships can influence emotional experiences, identity, behaviour and social functioning. They are therefore studied from biological, cognitive and sociocultural perspectives."
-      },
-      {
-        title: "The biological perspective",
-        text: "Biological explanations may examine the role of hormones, brain systems and evolutionary influences in social behaviour and relationships.",
-        why: "Biological mechanisms may contribute to social behaviour, but they cannot independently explain the complexity of relationships."
-      },
-      {
-        title: "The cognitive perspective",
-        text: "Cognitive explanations investigate how people perceive, interpret and remember information about other people.",
-        bullets: [
-          "Attributions: explanations people make about the causes of behaviour.",
-          "Schemas: mental frameworks that organise information.",
-          "Social cognition: mental processes involved in understanding other people."
-        ],
-        why: "People do not respond only to what others do. They also respond to how they interpret those actions."
-      },
-      {
-        title: "The sociocultural perspective",
-        text: "Sociocultural explanations consider the influence of group norms, social roles, culture and social environments on relationships.",
-        why: "Expectations about friendship, family and social behaviour can differ across cultural and social contexts."
-      },
-      {
-        title: "Researching relationships",
-        text: "Researchers may use questionnaires, interviews, observations and experiments to investigate different aspects of relationships.",
-        why: "A questionnaire can identify patterns across many participants, while an interview may provide more detailed insight into personal experiences."
-      }
-    ],
-    research: [
-      {
-        title: "Class practical: questionnaire",
-        text: "The human relationships context uses a survey or questionnaire with a minimum of ten participants.",
-        evaluation: "Questionnaires allow standardised data collection, but leading questions, ambiguous wording and social desirability can influence responses."
-      },
-      {
-        title: "Example: self-report research",
-        text: "Self-report methods can investigate participants' attitudes, perceptions and experiences of relationships.",
-        evaluation: "Participants can describe their own experiences, but their answers may be affected by memory, interpretation or a desire to present themselves positively."
-      },
-      {
-        title: "Example: social observation",
-        text: "Observational research can investigate how people interact in social settings.",
-        evaluation: "It can provide behavioural evidence, although researchers may disagree about how to interpret complex social behaviour."
-      }
-    ],
-    practice: [
-      {
-        question: "Explain one limitation of using questionnaires to study human relationships. [4 marks]",
-        answer: "One limitation is social desirability bias. Participants may provide answers they believe are socially acceptable rather than expressing their genuine opinions. This can reduce the validity of the findings because the responses may not accurately represent their attitudes or experiences."
-      },
-      {
-        question: "Explain how the sociocultural approach can contribute to understanding relationships. [4 marks]",
-        answer: "The sociocultural approach investigates how social norms and cultural expectations influence behaviour. For example, expectations about communication and family roles may influence how individuals interact with other people."
+        "title": "Data interpretation (supporting research reference)",
+        "topics": [
+          {
+            "title": "Types of data: nominal, ordinal and interval/ratio",
+            "definition": "Nominal data are categories or frequencies; ordinal data are ranked; interval/ratio data provide numerical scores with interpretable intervals.",
+            "body": "The notes use helping behaviour to illustrate the difference. Nominal data might count how many people helped. Ordinal data might rank who helped first. Interval/ratio data could record exact reaction times, allowing calculations such as the mean.",
+            "why": "The type of data determines which summaries and analyses are appropriate. More detailed numerical scores can support more calculations, but the research question and measurement quality still matter.",
+            "terms": [
+              "Nominal",
+              "Ordinal",
+              "Interval",
+              "Ratio",
+              "Quantitative",
+              "Qualitative"
+            ],
+            "sections": [
+              {
+                "heading": "Three levels of measurement",
+                "body": "The data handout uses three broad levels. Nominal data are categories or frequencies with no meaningful order. Ordinal data are ranked, so one score can be placed above or below another, but the distance between ranks is not necessarily equal. Interval/ratio data provide numerical scores with interpretable differences between values; ratio measures also have a meaningful zero."
+              }
+            ]
+          }
+        ]
       }
     ]
   },
-
-  learning: {
-    number: "UNIT 05",
-    title: "Learning and cognition",
-    description: "Explore how people acquire information, process experiences, remember and make decisions.",
-    tag: "CONTEXT 04",
-    notes: [
-      {
-        title: "What is cognition?",
-        text: "Cognition refers to mental processes involved in acquiring, processing, storing and using information. These processes include attention, perception, memory and decision-making.",
-        definition: "Learning refers to a relatively lasting change in knowledge or behaviour resulting from experience.",
-        why: "Cognitive processes influence how individuals understand their environment and respond to new information."
-      },
-      {
-        title: "The biological approach",
-        text: "The biological approach investigates how brain structures, neural activity and biological mechanisms contribute to learning and cognitive processes.",
-        why: "Learning involves changes in the nervous system. Biological research can therefore help explain the mechanisms associated with acquiring and retaining information."
-      },
-      {
-        title: "The cognitive approach",
-        text: "The cognitive approach focuses on information processing, including attention, memory, perception and reasoning.",
-        bullets: [
-          "Encoding: transforming information into a form that can be stored.",
-          "Storage: retaining information over time.",
-          "Retrieval: accessing stored information.",
-          "Attention: selecting information for further processing."
-        ],
-        why: "Understanding how information is processed helps explain why some information is remembered while other information is forgotten."
-      },
-      {
-        title: "The sociocultural approach",
-        text: "The sociocultural approach considers how learning and thinking are influenced by social interaction, language, culture and shared knowledge.",
-        why: "Learning can occur through interaction with other people. Social environments can influence the information individuals encounter and the strategies they develop."
-      },
-      {
-        title: "Researching learning and cognition",
-        text: "Researchers may use experiments to investigate memory, attention and learning. They can manipulate conditions and measure performance.",
-        why: "Experiments can help investigate relationships between variables, although results from controlled tasks may not always reflect everyday cognitive activity."
-      }
-    ],
-    research: [
-      {
-        title: "Class practical: experiment",
-        text: "The learning and cognition context uses an experiment, either true or quasi-experimental, with a minimum of five participants.",
-        evaluation: "An experiment can control conditions and investigate relationships between variables, but artificial tasks may reduce ecological validity."
-      },
-      {
-        title: "Example: memory experiments",
-        text: "Memory research may compare recall or recognition under different conditions, such as different presentation methods or delays.",
-        evaluation: "Performance can be measured systematically, but results may be affected by individual differences and the artificial nature of the task."
-      },
-      {
-        title: "Example: attention research",
-        text: "Attention studies may investigate how distractions or competing information affect performance on a task.",
-        evaluation: "Controlled tasks can isolate variables, although everyday attention is more complex than performance on a single laboratory task."
-      }
-    ],
-    practice: [
-      {
-        question: "Define encoding in relation to memory. [2 marks]",
-        answer: "Encoding is the process of transforming information into a form that can be stored in memory."
-      },
-      {
-        question: "Explain one strength and one limitation of using experiments to investigate memory. [6 marks]",
-        answer: "A strength is that researchers can manipulate an independent variable and measure its effect on memory performance, allowing greater control over conditions. A limitation is that laboratory memory tasks may be artificial and may not reflect how people use memory in everyday life."
-      }
-    ]
-  }
-};
-
-let currentUnit = "investigations";
-let currentTab = "notes";
-
-const unitButtons = document.querySelectorAll(".unit-card");
-const tabs = document.querySelectorAll(".tab");
-const content = document.getElementById("unit-content");
-
-function renderNotes(unit) {
-  return unit.notes.map((item) => `
-    <article class="topic-block">
-      <h3>${item.title}</h3>
-      <p>${item.text}</p>
-      ${item.definition ? `
-        <div class="definition"><strong>Key definition</strong><br>${item.definition}</div>
-      ` : ""}
-      ${item.bullets ? `
-        <ul>${item.bullets.map(point => `<li>${point}</li>`).join("")}</ul>
-      ` : ""}
-      ${item.why ? `
-        <div class="why-box"><strong>WHY DOES THIS MATTER?</strong>${item.why}</div>
-      ` : ""}
-    </article>
-  `).join("");
-}
-
-function renderResearch(unit) {
-  return unit.research.map((item) => `
-    <article class="research-card">
-      <h3>${item.title}</h3>
-      <p>${item.text}</p>
-      <div class="why-box"><strong>CRITICAL EVALUATION</strong>${item.evaluation}</div>
-    </article>
-  `).join("");
-}
-
-function renderPractice(unit) {
-  return unit.practice.map((item, index) => `
-    <article class="question-card">
-      <p class="eyebrow">PRACTICE QUESTION ${index + 1}</p>
-      <h3>${item.question}</h3>
-      <button class="answer-button" type="button" aria-expanded="false">
-        Reveal model answer +
-      </button>
-      <div class="answer">${item.answer}</div>
-    </article>
-  `).join("");
-}
-
-function renderUnit() {
-  const unit = units[currentUnit];
-
-  document.getElementById("unit-eyebrow").textContent = unit.number;
-  document.getElementById("unit-title").textContent = unit.title;
-  document.getElementById("unit-description").textContent = unit.description;
-  document.getElementById("unit-tag").textContent = unit.tag;
-
-  if (currentTab === "notes") {
-    content.innerHTML = renderNotes(unit);
-  } else if (currentTab === "research") {
-    content.innerHTML = renderResearch(unit);
-  } else {
-    content.innerHTML = renderPractice(unit);
-  }
-}
-
-unitButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    currentUnit = button.dataset.unit;
-
-    unitButtons.forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
-
-    currentTab = "notes";
-    tabs.forEach((tab) => {
-      tab.classList.toggle("active", tab.dataset.tab === "notes");
-    });
-
-    renderUnit();
-    document.getElementById("study-area").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  });
-});
-
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    currentTab = tab.dataset.tab;
-
-    tabs.forEach((item) => {
-      item.classList.toggle("active", item === tab);
-    });
-
-    renderUnit();
-  });
-});
-
-content.addEventListener("click", (event) => {
-  const button = event.target.closest(".answer-button");
-  if (!button) return;
-
-  const answer = button.nextElementSibling;
-  const isVisible = answer.classList.toggle("visible");
-
-  button.textContent = isVisible
-    ? "Hide model answer −"
-    : "Reveal model answer +";
-
-  button.setAttribute("aria-expanded", String(isVisible));
-});
-
-document.querySelectorAll("[data-go]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const target = button.dataset.go;
-    const unitButton = document.querySelector(`[data-unit="${target}"]`);
-    if (unitButton) unitButton.click();
-  });
-});
-
-renderUnit();
