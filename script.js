@@ -43,18 +43,36 @@ const quizBank = {
  ]
 };
 function esc(value=''){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
-function topicSearchText(topic){return [topic.title,topic.definition,topic.body,topic.example,topic.why,topic.evaluation,...(topic.sections||[]).flatMap(s=>[s.heading,s.body,...(s.points||[])])].join(' ').toLowerCase();}
+// The course content is stored as compact arrays from the supplied notes:
+// [topic title, core explanation, extra explanation, example, semicolon-separated terms].
+// Convert those arrays into objects before rendering so every unit uses one consistent format.
+function topicFromRow(row){
+ return {
+  title: row[0] || '',
+  definition: row[1] || '',
+  body: row[2] || '',
+  example: row[3] || '',
+  terms: row[4] ? row[4].split(';').map(term => term.trim()).filter(Boolean) : []
+ };
+}
+function topicSearchText(topic){
+ return [topic.title,topic.definition,topic.body,topic.example,topic.why,topic.evaluation,
+  ...(topic.sections||[]).flatMap(section=>[section.heading,section.body,...(section.points||[])])]
+  .join(' ').toLowerCase();
+}
 function renderTopic(topic,index){
- const sections=(topic.sections||[]).map(section=>`<section class="detail-section"><h4>${esc(section.heading)}</h4><p>${esc(section.body)}</p>${section.points?.length?`<ul>${section.points.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>`:''}</section>`).join('');
- return `<article class="topic-card"><button class="topic-toggle" type="button" aria-expanded="false"><span class="toggle-title"><span class="toggle-number">${String(index+1).padStart(2,'0')}</span>${esc(topic.title)}</span><span class="toggle-chevron">⌄</span></button><div class="topic-body"><div class="definition"><span class="box-label">CORE IDEA</span>${esc(topic.definition)}</div><p>${esc(topic.body)}</p>${topic.example?`<div class="example-box"><span class="box-label">EXAMPLE / APPLICATION</span>${esc(topic.example)}</div>`:''}${topic.why?`<div class="why-box"><span class="box-label">WHY IT MATTERS</span>${esc(topic.why)}</div>`:''}${topic.evaluation?`<div class="evaluation-box"><span class="box-label">EVALUATION</span>${esc(topic.evaluation)}</div>`:''}${sections}${topic.terms?.length?`<div class="pill-row">${topic.terms.map(t=>`<span class="pill">${esc(t)}</span>`).join('')}</div>`:''}</div></article>`;
+ const sections=(topic.sections||[]).map(section=>`<section class="detail-section"><h4>${esc(section.heading)}</h4><p>${esc(section.body)}</p>${section.points?.length?`<ul>${section.points.map(point=>`<li>${esc(point)}</li>`).join('')}</ul>`:''}</section>`).join('');
+ return `<article class="topic-card"><button class="topic-toggle" type="button" aria-expanded="false"><span class="toggle-title"><span class="toggle-number">${String(index+1).padStart(2,'0')}</span>${esc(topic.title)}</span><span class="toggle-chevron">⌄</span></button><div class="topic-body"><div class="definition"><span class="box-label">CORE IDEA</span>${esc(topic.definition)}</div><p>${esc(topic.body)}</p>${topic.example?`<div class="example-box"><span class="box-label">EXAMPLE / APPLICATION</span>${esc(topic.example)}</div>`:''}${topic.why?`<div class="why-box"><span class="box-label">WHY IT MATTERS</span>${esc(topic.why)}</div>`:''}${topic.evaluation?`<div class="evaluation-box"><span class="box-label">EVALUATION</span>${esc(topic.evaluation)}</div>`:''}${sections}${topic.terms.length?`<div class="pill-row">${topic.terms.map(term=>`<span class="pill">${esc(term)}</span>`).join('')}</div>`:''}</div></article>`;
 }
 function renderNotes(query=''){
  const unit=course[currentUnit];let html='',count=0;const q=query.trim().toLowerCase();
- unit.groups.forEach(group=>{
-  const matched=group.topics.filter(t=>!q||topicSearchText(t).includes(q));
+ (unit.groups||[]).forEach(group=>{
+  const groupTitle=group[0] || 'Course notes';
+  const topicRows=group[1] || [];
+  const matched=topicRows.map(topicFromRow).filter(topic=>!q||topicSearchText(topic).includes(q));
   if(!matched.length)return;
-  html+=`<div class="content-group"><h3 class="group-heading">${esc(group.title)}</h3>`;
-  matched.forEach(t=>{html+=renderTopic(t,count++);});
+  html+=`<div class="content-group"><h3 class="group-heading">${esc(groupTitle)}</h3>`;
+  matched.forEach(topic=>{html+=renderTopic(topic,count++);});
   html+='</div>';
  });
  $('#unit-content').innerHTML=html||'<div class="empty-state">No notes match that search. Try another keyword.</div>';
@@ -126,9 +144,9 @@ function renderGlossary(){
 }
 document.addEventListener('click',event=>{
  const unitButton=event.target.closest('.unit-card');
- if(unitButton){currentUnit=unitButton.dataset.unit;currentTab='notes';quizIndex=0;$('#course-search').value='';render();$('#study-area').scrollIntoView({behavior:'smooth',block:'start'});return;}
+ if(unitButton){currentUnit=unitButton.dataset.unit;currentTab='notes';quizIndex=0;quizAnswered=false;$('#course-search').value='';render();$('#study-area').scrollIntoView({behavior:'smooth',block:'start'});return;}
  const tab=event.target.closest('.tab');
- if(tab){currentTab=tab.dataset.tab;render();return;}
+ if(tab){currentTab=tab.dataset.tab;if(currentTab==='quiz')quizAnswered=false;render();return;}
  const topicToggle=event.target.closest('.topic-toggle,.study-toggle');
  if(topicToggle){const card=topicToggle.closest('.topic-card,.study-card');const open=card.classList.toggle('is-open');topicToggle.setAttribute('aria-expanded',String(open));return;}
  if(event.target.closest('#expand-all')){$$('.topic-card,.study-card').forEach(c=>{c.classList.add('is-open');const b=$('.topic-toggle,.study-toggle',c);if(b)b.setAttribute('aria-expanded','true');});return;}
