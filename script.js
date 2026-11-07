@@ -1,912 +1,586 @@
 
-const units = {
-
-  // ==========================================
-  // UNIT 1: PSYCHOLOGICAL INVESTIGATIONS
-  // ==========================================
-
-  investigations: {
-    kicker: "SECTION 01 · RESEARCH METHODS",
-    title: "Psychological Investigations",
-    intro: "Understand how psychologists investigate behaviour, collect evidence and evaluate the quality of research.",
-
-    notes: [
+const units = [
+  {
+    title: "Foundations & research",
+    tag: "AREA 01",
+    topics: [
       {
-        title: "1. What is a psychological investigation?",
-        explanation: "A psychological investigation is a systematic process used to study behaviour and mental processes. Researchers begin with a research question, choose an appropriate method, collect data and interpret their findings.",
-        why: "Human behaviour is complex. A person’s actions can be influenced by biological, cognitive and sociocultural factors simultaneously. A systematic investigation helps researchers examine a specific aspect of behaviour while making their procedure transparent and open to evaluation.",
+        title: "The three psychological approaches",
+        explanation: "The biological approach investigates how biological processes influence behaviour. The cognitive approach investigates mental processes such as memory and attention. The sociocultural approach examines how social and cultural environments influence behaviour.",
+        why: "Human behaviour rarely has one simple cause. For example, stress may involve physiological responses, interpretations of events and social pressures. Using multiple approaches gives psychologists a broader explanation.",
         points: [
-          "A research question identifies the behaviour or process being investigated.",
-          "A hypothesis predicts a relationship or difference when appropriate.",
-          "A method determines how evidence will be collected.",
-          "Data must be interpreted in relation to the research question.",
-          "Conclusions should not claim more than the evidence supports."
-        ]
+          "Biological: brain structures, neurotransmitters, hormones and genetics.",
+          "Cognitive: memory, perception, schemas, attention and thinking.",
+          "Sociocultural: social norms, culture, identity and group influence."
+        ],
+        example: "A student experiencing exam anxiety could be studied through physiological arousal (biological), negative expectations (cognitive) and pressure from family or peers (sociocultural).",
+        tip: "Do not simply name an approach. Explain how its assumptions help explain the behaviour in the question."
       },
       {
-        title: "2. Operationalization",
-        explanation: "Operationalization is the process of defining an abstract psychological variable in specific, observable or measurable terms.",
-        why: "Concepts such as happiness, memory, attraction and stress are abstract. Researchers cannot measure them directly without deciding what counts as evidence. Operationalization makes the research procedure clearer and allows other researchers to understand or repeat it.",
+        title: "The six key concepts",
+        explanation: "The 2027 course uses six concepts to help students think critically about psychological explanations and research.",
+        why: "Psychological findings are produced by people using particular methods, measurements and perspectives. The concepts help us question how reliable and responsible those findings are.",
         points: [
-          "Memory could be measured by the number of words correctly recalled.",
-          "Stress could be measured using a specified questionnaire score.",
-          "Attraction could be operationalized through a participant's rating of another person.",
-          "A poorly chosen measure may fail to capture the full psychological concept.",
-          "A clear operational definition supports consistency and replicability."
-        ]
+          "Bias: systematic influences that may distort research or interpretation.",
+          "Causality: whether one variable can be said to cause a change in another.",
+          "Change: how behaviour or mental processes develop over time.",
+          "Measurement: how psychological variables are operationalised and assessed.",
+          "Perspective: the viewpoint or framework used to understand behaviour.",
+          "Responsibility: ethical and social duties when conducting and applying psychology."
+        ],
+        example: "A questionnaire about anxiety may involve measurement because the researcher must define what counts as anxiety, and bias if the questions lead participants towards a particular answer.",
+        tip: "Practise connecting concepts to actual research decisions rather than memorising six isolated definitions."
       },
       {
-        title: "3. Experiments",
-        explanation: "An experiment investigates the effect of an independent variable on a dependent variable. Researchers manipulate or compare conditions and measure the outcome.",
-        why: "Experiments can help investigate causality because researchers deliberately change a condition and examine whether the outcome changes. When other relevant variables are controlled, it becomes easier to determine whether the independent variable contributed to the result.",
+        title: "Research methods",
+        explanation: "Psychologists use experiments, interviews, observations and surveys/questionnaires to investigate behaviour. The method should fit the research question.",
+        why: "Different methods provide different types of evidence. An experiment can investigate the effect of a manipulated variable, while an interview can explore personal experiences in depth.",
         points: [
-          "Independent variable: the factor manipulated or compared.",
-          "Dependent variable: the outcome measured.",
-          "Controlled variables: factors kept consistent.",
-          "Random allocation can reduce systematic differences between conditions.",
-          "Demand characteristics may occur when participants guess the study's aim.",
-          "Artificial settings may reduce ecological validity."
-        ]
+          "True experiment: the researcher manipulates an independent variable and uses random allocation to conditions.",
+          "Quasi-experiment: compares naturally existing groups or conditions; random allocation is generally not possible.",
+          "Interview: collects detailed verbal information from participants.",
+          "Observation: records behaviour systematically.",
+          "Survey/questionnaire: collects participants' reported attitudes, experiences or behaviours."
+        ],
+        example: "To investigate whether background noise affects memory, a researcher could manipulate sound conditions and compare participants' memory performance.",
+        tip: "Justify why a method is suitable, and acknowledge what it cannot establish."
       },
       {
-        title: "4. Interviews",
-        explanation: "Interviews involve asking participants questions to investigate their experiences, opinions or behaviour.",
-        why: "Interviews can provide detailed information because participants can explain their answers in their own words. Follow-up questions allow researchers to clarify unexpected responses, which is particularly useful when investigating experiences that cannot be easily reduced to numbers.",
+        title: "Sampling and generalisability",
+        explanation: "A sample is the group of people who participate in a study. Researchers select a sample from a target population.",
+        why: "A sample that differs substantially from the target population may produce findings that do not generalise well. Sampling decisions therefore affect the conclusions researchers can reasonably draw.",
         points: [
-          "Structured interviews use predetermined questions.",
-          "Semi-structured interviews use guiding questions with flexibility.",
-          "Unstructured interviews allow more open conversation.",
-          "Interviewer expectations may influence responses.",
-          "Social desirability may cause participants to present themselves favourably.",
-          "Transcription and thematic analysis can be time-consuming."
-        ]
+          "Opportunity sampling: selecting people who are readily available.",
+          "Volunteer sampling: recruiting people who choose to participate.",
+          "Random sampling: selecting participants through a random process.",
+          "Stratified sampling: selecting participants to reflect relevant subgroups.",
+          "Generalisability: the extent to which findings may apply to other people or settings."
+        ],
+        example: "A study using only students from one school may not represent adults or students from different educational and cultural settings.",
+        tip: "Do not confuse random sampling with random allocation. Sampling selects participants; allocation places participants into conditions."
       },
       {
-        title: "5. Observations",
-        explanation: "Observations involve systematically recording behaviour in a particular setting.",
-        why: "People do not always behave exactly as they report in questionnaires or interviews. Observations allow researchers to examine behaviour as it occurs. However, the observer's presence or expectations may influence what is recorded.",
+        title: "Ethics, validity and reliability",
+        explanation: "Ethics protects participants. Reliability concerns consistency, while validity concerns whether a measure or conclusion is appropriate for its intended purpose.",
+        why: "A study can be consistent but still measure the wrong thing. It can also use a valid measure but treat participants unethically. Strong research must consider all of these issues.",
         points: [
-          "Naturalistic observation takes place in a natural environment.",
-          "Controlled observation takes place in a more structured setting.",
-          "Participant observation involves the researcher participating in the group.",
-          "Non-participant observation involves observing without joining the activity.",
-          "Inter-observer reliability concerns consistency between observers.",
-          "Observer bias may influence the recording or interpretation of behaviour."
-        ]
-      },
-      {
-        title: "6. Questionnaires",
-        explanation: "Questionnaires collect information through written or digital questions.",
-        why: "Questionnaires allow researchers to gather comparable responses from multiple participants efficiently. However, the answers reflect what participants report, which may not perfectly represent their actual behaviour or experiences.",
-        points: [
-          "Closed questions provide fixed response options.",
-          "Open questions allow participants to answer in their own words.",
-          "Leading questions may influence responses.",
-          "Ambiguous wording can cause inconsistent interpretations.",
-          "Social desirability may affect answers.",
-          "A questionnaire should be piloted before use."
-        ]
-      },
-      {
-        title: "7. Ethics in psychological research",
-        explanation: "Ethical research protects participants' dignity, rights, privacy and well-being.",
-        why: "Psychological investigations involve real people and potentially sensitive information. Without appropriate ethical safeguards, participants may feel pressured, exposed or harmed. Ethical practice also supports trust between researchers and participants.",
-        points: [
-          "Informed consent: participants understand what participation involves.",
-          "Right to withdraw: participants can leave the study under the stated conditions.",
-          "Confidentiality: identifiable information is protected.",
-          "Anonymity: identities are not collected or cannot be linked to responses.",
-          "Protection from harm: researchers minimize physical and psychological risks.",
-          "Debriefing: participants receive an appropriate explanation after participation."
-        ]
-      }
-    ],
-
-    questions: [
-      {
-        type: "Define · 2 marks",
-        question: "Define operationalization.",
-        answer: "Operationalization is the process of defining an abstract psychological variable in specific, observable or measurable terms. For example, memory could be operationalized as the number of words correctly recalled from a list.",
-        approach: "Give a precise definition first. Add a short example to demonstrate that you understand how an abstract concept becomes measurable."
-      },
-      {
-        type: "Explain · 4 marks",
-        question: "Explain one reason why a researcher might use a semi-structured interview.",
-        answer: "A semi-structured interview uses predetermined guiding questions while allowing the interviewer to ask follow-up questions. This is useful when investigating personal experiences because participants can explain their answers in greater detail. If an unexpected response occurs, the interviewer can ask for clarification. This creates a balance between collecting comparable information and gaining detailed qualitative data.",
-        approach: "Identify the method, explain how it works and connect its characteristics to the research aim."
-      },
-      {
-        type: "Application · 4 marks",
-        question: "A researcher investigates whether background music influences memory. Identify an appropriate independent variable and dependent variable.",
-        answer: "The independent variable could be the listening condition, with participants completing the task in silence or while listening to background music. The dependent variable could be the number of words correctly recalled from an identical word list after a fixed interval. These variables are operationalized because both the conditions and the outcome are clearly specified.",
-        approach: "Name each variable and explain precisely how it would be manipulated or measured."
-      },
-      {
-        type: "Explain · 6 marks",
-        question: "Explain two ethical considerations when observing children's behaviour.",
-        answer: "First, researchers should obtain informed consent from an appropriate parent or guardian and seek the child's assent in an age-appropriate way. This respects the child's developing autonomy and helps ensure that participation is not forced. Second, researchers should protect privacy and confidentiality by avoiding unnecessary identifying details and securely handling observations. This is particularly important because children may be identifiable within a small school or community.",
-        approach: "Develop two distinct ethical considerations. For each one, explain why it matters and how it protects participants."
-      },
-      {
-        type: "Evaluate · 6 marks",
-        question: "Evaluate questionnaires as a method of investigating human relationships.",
-        answer: "Questionnaires can collect responses from several participants using a consistent format, making comparisons easier. Closed questions can produce data that are straightforward to summarize, while open questions allow participants to explain their experiences. However, responses may be affected by social desirability, especially when questions concern personal relationships. Participants may also interpret questions differently or report behaviour inaccurately. Therefore, questionnaires are useful for identifying reported patterns, but findings should not automatically be treated as a complete account of actual relationship behaviour.",
-        approach: "Explain a strength and a limitation. Crucially, explain how each affects the quality or interpretation of the research."
-      }
-    ],
-
-    research: [
-      {
-        title: "Paper 2: Your class practicals",
-        text: "Know the actual practical completed in your class. Learn its aim, research question, sample, sampling technique, method, procedure, ethical considerations, data collection and conclusion. Never invent details of your class practical."
-      },
-      {
-        title: "Measurement",
-        text: "Ask whether the study's operational definition genuinely captures the psychological variable. A measure can be consistent without accurately measuring the intended concept."
-      },
-      {
-        title: "Bias",
-        text: "Consider sampling bias, observer expectations, leading questions, social desirability and demand characteristics. Explain how the particular bias could affect the findings."
-      },
-      {
-        title: "Causality",
-        text: "An association between two variables does not automatically demonstrate that one caused the other. Consider alternative explanations and whether the design supports causal conclusions."
+          "Informed consent: participants understand the study and agree voluntarily.",
+          "Right to withdraw: participants can leave without penalty.",
+          "Confidentiality: identifying information is protected.",
+          "Protection from harm: risks should be minimised.",
+          "Reliability: consistency of a measure or procedure.",
+          "Validity: whether the measure or conclusion reflects what it claims to."
+        ],
+        example: "A questionnaire that gives similar results each time may be reliable, but if it measures general tiredness instead of stress, it may lack construct validity.",
+        tip: "Explain exactly how a limitation affects the quality or interpretation of the findings."
       }
     ]
   },
-
-  // ==========================================
-  // UNIT 2: HEALTH AND WELL-BEING
-  // ==========================================
-
-  health: {
-    kicker: "SECTION 02 · CONTEXT",
-    title: "Health & Well-being",
-    intro: "Investigate how biological, cognitive and sociocultural factors influence health and psychological well-being.",
-
-    notes: [
+  {
+    title: "Health & well-being",
+    tag: "AREA 02",
+    topics: [
       {
-        title: "1. The biopsychosocial approach",
-        explanation: "The biopsychosocial approach considers biological, cognitive and sociocultural influences on health and well-being.",
-        why: "Health is rarely explained by a single factor. Biological processes influence the body, cognitive processes influence how situations are interpreted, and sociocultural environments influence the resources and pressures individuals experience. These factors may interact.",
+        title: "The biopsychosocial perspective",
+        explanation: "Health and well-being can be understood through interacting biological, psychological and social influences.",
+        why: "Physical processes, thoughts and emotions, and social environments can influence one another. A person's health cannot always be explained by biology alone.",
         points: [
-          "Biological influences include genetics and physiological processes.",
-          "Cognitive influences include beliefs, expectations and appraisal.",
-          "Sociocultural influences include relationships, norms and socioeconomic conditions.",
-          "An integrated explanation considers interactions rather than listing three unrelated factors."
-        ]
+          "Biological factors include genetics, hormones and physiological functioning.",
+          "Psychological factors include stress, beliefs, emotions and coping.",
+          "Social factors include relationships, culture, socioeconomic conditions and support."
+        ],
+        example: "A person experiencing prolonged stress may show physiological changes, interpret everyday demands as threatening and receive different levels of support from their social environment.",
+        tip: "Use all three dimensions where relevant, but explain the links between them rather than listing them."
       },
       {
-        title: "2. Stress and cognitive appraisal",
-        explanation: "Cognitive appraisal refers to how an individual evaluates a situation and its significance for their well-being.",
-        why: "Two people can experience the same event differently because they interpret its meaning and their ability to cope differently. A situation may be appraised as threatening when a person believes they lack the resources to manage it. Another person may view the same demand as manageable.",
+        title: "Stress and appraisal",
+        explanation: "Stress involves responses to demands that an individual perceives as challenging or threatening. Cognitive appraisal concerns how a person evaluates a situation and their ability to cope.",
+        why: "The same event may affect two people differently because they interpret its demands and their available resources differently.",
         points: [
-          "Primary appraisal concerns evaluating the significance of an event.",
-          "Secondary appraisal concerns evaluating available coping resources.",
-          "Problem-focused coping attempts to address the source of stress.",
-          "Emotion-focused coping aims to manage emotional responses.",
-          "The usefulness of a coping strategy depends on the situation."
-        ]
+          "Stressor: a demand or event that may produce stress.",
+          "Primary appraisal: evaluating whether an event is threatening, harmful or challenging.",
+          "Secondary appraisal: evaluating available coping resources.",
+          "Coping: cognitive or behavioural efforts to manage demands."
+        ],
+        example: "Two students may interpret the same examination differently. One may view it as manageable, while another may see it as overwhelming.",
+        tip: "Distinguish the event itself from the person's appraisal of that event."
       },
       {
-        title: "3. Social support",
-        explanation: "Social support refers to emotional, informational or practical resources provided through relationships.",
-        why: "Support can influence well-being by changing the resources available to a person and how they interpret a difficult situation. Practical help may reduce demands, while emotional reassurance may increase feelings of security and belonging.",
+        title: "Coping and social support",
+        explanation: "Coping strategies are used to manage stressful situations. Social support can provide emotional, informational or practical assistance.",
+        why: "Support may reduce the demands a person faces or help them interpret a difficult experience differently. Its usefulness depends on the situation and the individual's needs.",
         points: [
-          "Emotional support includes empathy and reassurance.",
-          "Informational support provides advice or guidance.",
-          "Instrumental support provides practical assistance.",
-          "Perceived support means believing help is available.",
-          "Received support refers to help actually provided.",
-          "Unwanted or controlling support can sometimes increase stress."
-        ]
-      },
-      {
-        title: "4. Health behaviour",
-        explanation: "Health behaviour includes actions that can influence physical and psychological health, such as sleep habits, activity, help-seeking and coping practices.",
-        why: "Health behaviour is influenced by more than individual knowledge. Beliefs, habits, social expectations, available resources and environmental barriers can all affect whether someone adopts or maintains a behaviour.",
-        points: [
-          "Consider the difference between intention and actual behaviour.",
-          "Social environments can encourage or discourage health-related choices.",
-          "Access to resources can affect opportunities to change behaviour.",
-          "Avoid assuming that individuals have complete control over every health outcome."
-        ]
-      }
-    ],
-
-    questions: [
-      {
-        type: "Define · 2 marks",
-        question: "Define cognitive appraisal.",
-        answer: "Cognitive appraisal is the process through which an individual evaluates the significance of a situation and their ability to cope with it.",
-        approach: "State the meaning accurately. Do not confuse appraisal with the physiological stress response itself."
-      },
-      {
-        type: "Explain · 4 marks",
-        question: "Explain how cognitive appraisal may influence an individual's experience of stress.",
-        answer: "An individual evaluates whether a situation is threatening and whether they have sufficient resources to cope. If a student interprets an upcoming assessment as threatening and believes they are unprepared, they may experience greater stress. If they view it as manageable and identify a revision plan, the same assessment may be appraised as less threatening. This demonstrates how interpretation can influence the experience of stress.",
-        approach: "Explain the process and show how it influences the outcome. Include a relevant example."
-      },
-      {
-        type: "Application · 6 marks",
-        question: "A student experiences a demanding school schedule but receives practical and emotional support from friends. Apply a sociocultural explanation.",
-        answer: "A sociocultural explanation focuses on how social relationships and the environment influence well-being. Friends may provide instrumental support by helping the student organize tasks and emotional support by listening and offering reassurance. These resources may reduce perceived demands and increase the student's sense of belonging. This illustrates how social relationships can influence well-being, although the effect depends on whether the support is experienced as helpful.",
-        approach: "Identify the relevant sociocultural factor, use details from the scenario and explain the psychological connection."
-      },
-      {
-        type: "Discuss · 15 marks",
-        question: "Discuss why a single psychological approach may be insufficient to explain health and well-being.",
-        answer: "A single approach may provide a useful but incomplete explanation because health and well-being are influenced by interacting factors. A biological approach can explain physiological processes and individual differences, but may not explain why individuals interpret the same situation differently. A cognitive approach can investigate appraisal and coping, but may understate social pressures or unequal access to support. A sociocultural approach can explain how relationships and environmental conditions influence well-being, but may overlook biological variation. An integrated explanation is therefore valuable because it considers interactions between bodily processes, individual interpretation and social context. However, integration requires evidence: simply naming three approaches does not demonstrate how they connect. The most relevant factors depend on the particular health outcome being investigated.",
-        approach: "Introduce the central issue, develop more than one approach, use relevant evidence and evaluate what each explanation contributes or overlooks. End with a reasoned judgement."
-      }
-    ],
-
-    research: [
-      {
-        title: "Research practical: Interview",
-        text: "The health and well-being practical involves an interview. Be prepared to discuss the interview structure, research question, participants, questions, procedure, ethical considerations and how responses were interpreted."
-      },
-      {
-        title: "Measurement",
-        text: "Health and well-being are broad concepts. Ask whether the study uses self-report, behaviour or physiological measures, and what each can and cannot capture."
-      },
-      {
-        title: "Responsibility",
-        text: "Sensitive questions require careful wording, privacy and appropriate participant support. Consider whether the research could cause discomfort."
+          "Problem-focused coping: addressing the source of the problem.",
+          "Emotion-focused coping: managing the emotional response.",
+          "Social support: assistance from other people.",
+          "Cognitive reappraisal: changing how a situation is interpreted."
+        ],
+        example: "A student might create a revision plan to address workload (problem-focused coping) and speak with a trusted person for reassurance (social support).",
+        tip: "Avoid claiming that one coping strategy is always best. Consider the context."
       }
     ]
   },
-
-  // ==========================================
-  // UNIT 3: HUMAN DEVELOPMENT
-  // ==========================================
-
-  development: {
-    kicker: "SECTION 03 · CONTEXT",
-    title: "Human Development",
-    intro: "Understand psychological change and continuity across the lifespan, including the interaction between biological and environmental influences.",
-
-    notes: [
+  {
+    title: "Human development",
+    tag: "AREA 03",
+    topics: [
       {
-        title: "1. What is human development?",
-        explanation: "Human development refers to patterns of change and continuity across the lifespan. It includes physical, cognitive, emotional and social development.",
-        why: "People change as they mature, learn and interact with their environments. Development is not identical for everyone because biological processes interact with experiences, opportunities and social contexts.",
+        title: "Nature and nurture",
+        explanation: "Human development is influenced by biological factors and environmental experiences. These influences can interact throughout life.",
+        why: "Biological maturation creates possibilities and constraints, while experience and the environment influence how abilities and behaviours develop.",
         points: [
-          "Development can involve gradual or more distinct changes.",
-          "Continuity refers to gradual change over time.",
-          "Discontinuity refers to changes that appear in distinct stages.",
-          "Development continues throughout the lifespan.",
-          "Individual differences should be considered."
-        ]
+          "Nature: biological influences, including genes and maturation.",
+          "Nurture: environmental influences, including learning and social experience.",
+          "Development: changes in behaviour and mental processes over time.",
+          "Plasticity: the capacity for change in response to experience."
+        ],
+        example: "Language development involves biological capacities as well as exposure to language and social interaction.",
+        tip: "Avoid presenting nature and nurture as an either/or debate. Explain their interaction."
       },
       {
-        title: "2. Nature and nurture",
-        explanation: "Nature refers broadly to biological influences, while nurture refers to environmental and experiential influences.",
-        why: "Biological characteristics may influence the opportunities and constraints individuals experience, while the environment shapes how these characteristics develop and are expressed. Therefore, nature and nurture are not necessarily opposing explanations.",
+        title: "Attachment and early relationships",
+        explanation: "Attachment refers to an emotional bond between an infant and caregiver. Researchers have investigated how early interactions relate to later social and emotional development.",
+        why: "Responsive caregiving may help infants develop expectations that other people are available and dependable. However, development is influenced by many later experiences too.",
         points: [
-          "Biological maturation can influence developmental capacities.",
-          "Learning and experience can influence skills and behaviour.",
-          "Family, education and culture provide different developmental environments.",
-          "Interactionist explanations examine how biological and environmental factors influence one another."
-        ]
+          "Secure attachment: the caregiver can act as a source of comfort and security.",
+          "Caregiver sensitivity: noticing and responding appropriately to an infant's signals.",
+          "Strange Situation: an observational procedure developed to examine infant-caregiver attachment behaviour.",
+          "Internal working model: a proposed set of expectations about relationships."
+        ],
+        example: "Ainsworth and colleagues used observations of infants' behaviour during separations and reunions with caregivers.",
+        tip: "Do not assume one early observation determines a person's entire future. Evaluate cultural and situational influences."
       },
       {
-        title: "3. Neuroplasticity",
-        explanation: "Neuroplasticity is the capacity of the nervous system to change its structure or functioning in response to experience, learning or environmental demands.",
-        why: "Repeated experiences can influence patterns of neural activity and the strength of connections between neurons. This helps explain how learning and practice can contribute to developmental change. However, plasticity does not mean that change is unlimited or identical for every individual.",
+        title: "Cognitive development",
+        explanation: "Cognitive development involves changes in thinking, reasoning, memory, language and problem-solving.",
+        why: "As people mature and gain experience, they may develop more complex ways of organising information and solving problems.",
         points: [
-          "Experience can influence neural connections.",
-          "Repeated practice may support more efficient neural processing.",
-          "Plasticity can contribute to learning and adaptation.",
-          "Developmental outcomes depend on the type and timing of experience.",
-          "Evidence of a brain difference does not automatically prove what caused it."
-        ]
-      },
-      {
-        title: "4. Social and cultural influences",
-        explanation: "Development occurs within social and cultural environments, including families, schools, peer groups and communities.",
-        why: "People learn behaviours, expectations and values through interaction. Cultural environments can shape which experiences are available and how developmental milestones are understood.",
-        points: [
-          "Socialization involves learning norms and expectations.",
-          "Culture can influence developmental opportunities.",
-          "Peer relationships can shape social learning.",
-          "A theory developed in one cultural context may not apply universally.",
-          "Researchers should avoid treating group averages as descriptions of every individual."
-        ]
-      }
-    ],
-
-    questions: [
-      {
-        type: "Define · 2 marks",
-        question: "Define neuroplasticity.",
-        answer: "Neuroplasticity is the capacity of the nervous system to change its structure or functioning in response to experience, learning or environmental demands.",
-        approach: "Give a concise and scientifically accurate definition."
-      },
-      {
-        type: "Explain · 4 marks",
-        question: "Explain one way experience may contribute to developmental change.",
-        answer: "Repeated learning experiences can influence patterns of neural activity and strengthen connections involved in a particular skill. With practice, the relevant neural networks may become more efficient. This provides a biological explanation of how experience can contribute to change over time. The extent of change may differ between individuals.",
-        approach: "Explain the mechanism linking experience to change. Avoid simply stating that the brain changes."
-      },
-      {
-        type: "Application · 4 marks",
-        question: "A researcher studies children from one city and makes a conclusion about all children worldwide. Explain one concern.",
-        answer: "The sample may not represent children from different cultural or socioeconomic backgrounds. Developmental experiences and expectations vary across societies, so findings from one city may not apply to all children. The researcher should limit the conclusion to the population supported by the sample or collect evidence from more diverse settings.",
-        approach: "Identify the research problem and explain its consequence for generalizing findings."
-      },
-      {
-        type: "Discuss · 15 marks",
-        question: "Discuss how biological and sociocultural factors may interact in human development.",
-        answer: "Biological factors such as maturation provide capacities and constraints, while sociocultural experiences shape how those capacities develop and are expressed. For example, biological changes may create new opportunities for learning, but the experiences available through family, education and culture influence which skills are practised. This challenges explanations that treat development as entirely predetermined or entirely learned. However, researchers should avoid assuming that an association between experience and developmental outcome proves causation. Samples may also be culturally narrow. Overall, an interactionist explanation is useful because it recognizes both biological processes and the environments in which people develop.",
-        approach: "Develop both sides of the interaction. Explain how the factors connect rather than writing two unrelated paragraphs."
-      }
-    ],
-
-    research: [
-      {
-        title: "Research practical: Observation",
-        text: "The human development practical uses observation. Know the target behaviour, setting, observation type, recording system, observer role, sampling approach and ethical safeguards from your actual class practical."
-      },
-      {
-        title: "Observer bias",
-        text: "An observer's expectations may influence which behaviours they notice or how they classify them. Clear behavioural categories and consistent recording procedures can help reduce this problem."
-      },
-      {
-        title: "Cultural bias",
-        text: "A developmental explanation may reflect the culture in which it was created. Consider whether the sample and theory represent different cultural experiences."
+          "Schema: a mental framework used to organise knowledge.",
+          "Assimilation: interpreting new information using an existing schema.",
+          "Accommodation: changing a schema to fit new information.",
+          "Executive functions: processes involved in planning, attention and self-regulation."
+        ],
+        example: "A child who thinks all four-legged animals are dogs may later modify that schema after learning about cats.",
+        tip: "Use an example to demonstrate the process, not just the definition."
       }
     ]
   },
-
-  // ==========================================
-  // UNIT 4: HUMAN RELATIONSHIPS
-  // ==========================================
-
-  relationships: {
-    kicker: "SECTION 04 · CONTEXT",
-    title: "Human Relationships",
-    intro: "Explore how people form, maintain and experience relationships through biological, cognitive and sociocultural explanations.",
-
-    notes: [
+  {
+    title: "Human relationships",
+    tag: "AREA 04",
+    topics: [
       {
-        title: "1. Understanding human relationships",
-        explanation: "Human relationships involve patterns of interaction, emotional connection and social behaviour between individuals.",
-        why: "Relationships are complex because people interpret one another's behaviour and respond to changing social situations. Biological characteristics, individual perceptions and cultural expectations may all influence relationship experiences.",
+        title: "Interpersonal attraction",
+        explanation: "Interpersonal attraction refers to the factors that influence whether people feel drawn towards one another.",
+        why: "Familiarity, proximity, similarity and reciprocal liking may influence opportunities for interaction and positive evaluations of other people.",
         points: [
-          "Relationships can involve friendship, family, romantic and social connections.",
-          "Relationship formation is different from relationship maintenance.",
-          "Communication influences how individuals understand each other.",
-          "Social context can influence expectations and behaviour."
-        ]
+          "Proximity: physical or social closeness.",
+          "Mere exposure: repeated exposure may increase familiarity and liking in some circumstances.",
+          "Similarity: shared attitudes, interests or values.",
+          "Reciprocity: liking may increase when people believe that another person likes them."
+        ],
+        example: "People who repeatedly interact in the same class may become more familiar with one another.",
+        tip: "Avoid treating attraction as universal. Cultural and individual differences matter."
       },
       {
-        title: "2. Similarity and attraction",
-        explanation: "Similarity refers to shared characteristics, interests, beliefs or attitudes between individuals. Researchers may investigate whether perceived similarity is associated with attraction or relationship closeness.",
-        why: "Perceived similarity may make interaction feel more predictable or validating. Shared interests may also create opportunities for interaction. However, actual similarity and perceived similarity are not identical, and an association does not automatically establish causation.",
+        title: "Communication",
+        explanation: "Communication involves exchanging information through verbal and non-verbal signals.",
+        why: "People interpret not only the words being used but also tone, facial expressions, gestures and context. Different interpretations can create misunderstandings.",
         points: [
-          "Actual similarity concerns objectively shared characteristics.",
-          "Perceived similarity concerns how similar individuals believe they are.",
-          "People may perceive someone as more similar after becoming close.",
-          "Shared experiences may influence both similarity and closeness.",
-          "Avoid presenting attraction as governed by one universal rule."
-        ]
+          "Verbal communication: the use of spoken or written language.",
+          "Non-verbal communication: facial expressions, gestures, posture and other signals.",
+          "Active listening: attending to and responding to another person's message.",
+          "Communication style: patterns in how people express and interpret messages."
+        ],
+        example: "A short written message may be interpreted differently depending on the relationship and the recipient's expectations.",
+        tip: "Connect the communication process to a specific outcome in the relationship."
       },
       {
-        title: "3. Communication",
-        explanation: "Communication involves exchanging information through verbal and non-verbal behaviour.",
-        why: "Communication helps individuals express intentions, interpret emotions and coordinate social behaviour. However, people may interpret the same message differently depending on prior experiences, expectations and cultural norms.",
+        title: "Social influence and relationships",
+        explanation: "Relationships develop within social environments. Norms, expectations, group membership and cultural values can influence how people behave towards one another.",
+        why: "People may adjust their behaviour to gain acceptance, avoid conflict or follow expectations within a group.",
         points: [
-          "Verbal communication includes spoken and written language.",
-          "Non-verbal communication includes facial expressions, gestures and body language.",
-          "Context influences how messages are interpreted.",
-          "Miscommunication may occur when intentions and interpretations differ.",
-          "Questionnaire responses may not perfectly reflect actual communication behaviour."
-        ]
-      },
-      {
-        title: "4. Sociocultural influences on relationships",
-        explanation: "Relationships develop within social networks, cultural expectations and wider social environments.",
-        why: "Social norms can influence how people express closeness, disagreement and support. Cultural expectations may shape what individuals consider appropriate relationship behaviour, so psychological explanations should not automatically be treated as universal.",
-        points: [
-          "Culture may influence relationship expectations.",
-          "Social networks create opportunities for interaction.",
-          "Technology can change how people communicate.",
-          "Research should consider whose experiences are represented.",
-          "Avoid stereotyping individuals based on group membership."
-        ]
-      }
-    ],
-
-    questions: [
-      {
-        type: "Explain · 4 marks",
-        question: "Explain the difference between actual similarity and perceived similarity.",
-        answer: "Actual similarity refers to characteristics that two individuals objectively share, whereas perceived similarity refers to how similar they believe they are. Perceived similarity may influence interaction even when the individuals are not as objectively similar as they think. Researchers should therefore specify which form of similarity they measure.",
-        approach: "Define both terms and make the distinction explicit."
-      },
-      {
-        type: "Application · 6 marks",
-        question: "A questionnaire finds that students who report similar communication styles also report greater friendship closeness. Explain why this does not prove causation.",
-        answer: "The association does not demonstrate that similarity caused closeness. It is possible that feeling close causes students to perceive their communication styles as more similar. A third variable, such as shared activities or time spent together, may influence both. Since a questionnaire measures reported variables rather than manipulating communication style, it cannot establish a causal relationship by itself.",
-        approach: "Explain reverse causality and at least one possible third variable. Connect the points to the questionnaire design."
-      },
-      {
-        type: "Evaluate · 6 marks",
-        question: "Evaluate questionnaires as a method of investigating communication in relationships.",
-        answer: "Questionnaires allow researchers to collect comparable responses from multiple participants and can include both fixed-choice and open-ended questions. This may reveal patterns in reported communication. However, participants may respond in socially desirable ways or interpret questions differently. Self-reported behaviour may also differ from actual behaviour. Therefore, questionnaires can be useful for investigating reported experiences, but their conclusions should be interpreted cautiously.",
-        approach: "Explain the practical strength and research limitation, then connect each to the quality of the findings."
-      },
-      {
-        type: "Discuss · 15 marks",
-        question: "Discuss how psychological perspectives may influence explanations of human relationships.",
-        answer: "Different psychological approaches can explain different aspects of relationship behaviour. A cognitive perspective may investigate how people interpret another person's actions, while a sociocultural perspective may emphasize cultural expectations and social networks. A biological perspective may investigate physiological or evolutionary influences. These perspectives can complement one another because relationships involve individual processes and social environments. However, each perspective becomes limited if treated as a complete explanation. Research may also reflect cultural bias when participants come from a narrow population. A balanced explanation should compare what each perspective explains well and identify what it overlooks.",
-        approach: "Compare approaches and explain their contributions and limitations. Finish by judging why an integrated or particular perspective is useful."
-      }
-    ],
-
-    research: [
-      {
-        title: "Research practical: Questionnaire",
-        text: "Know the exact questionnaire your class designed or used. Revise the aim, target population, sample, question types, procedure, ethics, response format and how the data were interpreted."
-      },
-      {
-        title: "Social desirability",
-        text: "Participants may report what they believe is socially acceptable rather than what they genuinely think or do. This may affect the validity of self-report findings."
-      },
-      {
-        title: "Causality",
-        text: "A correlation between two relationship variables does not demonstrate that one caused the other. Consider reverse causality and third variables."
+          "Social norms: shared expectations about behaviour.",
+          "Conformity: changing behaviour or judgement in response to group influence.",
+          "Social identity: aspects of self-concept connected to group membership.",
+          "Social support: emotional or practical help from others."
+        ],
+        example: "A person may change how they communicate in a group because they want to fit its expectations.",
+        tip: "Explain the influence of the social setting, rather than assuming everyone responds identically."
       }
     ]
   },
-
-  // ==========================================
-  // UNIT 5: LEARNING AND THINKING
-  // ==========================================
-
-  learning: {
-    kicker: "SECTION 05 · CONTEXT",
-    title: "Learning & Thinking",
-    intro: "Understand how people acquire, process, store and use information through psychological learning and cognitive processes.",
-
-    notes: [
+  {
+    title: "Learning & cognition",
+    tag: "AREA 05",
+    topics: [
       {
-        title: "1. Learning and cognition",
-        explanation: "Learning involves a relatively lasting change in knowledge or behaviour resulting from experience. Cognition refers to mental processes involved in acquiring, processing, storing and using information.",
-        why: "People do not simply copy information from their surroundings. Attention, prior knowledge, expectations and memory influence how new information is processed. These processes help explain why individuals may learn differently from the same experience.",
+        title: "Classical conditioning",
+        explanation: "Classical conditioning is learning through association. A previously neutral stimulus can become associated with a stimulus that naturally produces a response.",
+        why: "The learner begins to anticipate an event when a stimulus reliably predicts it. The previously neutral stimulus can then trigger a learned response.",
         points: [
-          "Learning involves change through experience.",
-          "Cognition includes attention, perception, memory and reasoning.",
-          "Prior knowledge can influence how new information is understood.",
-          "Performance at one moment may not represent everything a person has learned."
-        ]
+          "Unconditioned stimulus: naturally produces a response.",
+          "Unconditioned response: the natural response.",
+          "Neutral stimulus: initially does not produce the target response.",
+          "Conditioned stimulus: the previously neutral stimulus after learning.",
+          "Conditioned response: the learned response."
+        ],
+        example: "A sound repeatedly paired with an unpleasant event may eventually produce an emotional response by itself.",
+        tip: "Label each stimulus and response accurately when applying the theory."
       },
       {
-        title: "2. Memory processes",
-        explanation: "Memory involves encoding, storage and retrieval of information.",
-        why: "Information must be processed before it can be retained and later accessed. Retrieval depends partly on available cues and the way information was encoded. Therefore, forgetting does not always mean information has disappeared completely; access to it may be difficult.",
+        title: "Operant conditioning",
+        explanation: "Operant conditioning describes learning through consequences. Reinforcement increases the likelihood of behaviour, while punishment decreases it.",
+        why: "Consequences can influence whether an individual repeats a behaviour in a similar situation.",
         points: [
-          "Encoding: processing information into a form that can be retained.",
+          "Positive reinforcement: adding a consequence that increases behaviour.",
+          "Negative reinforcement: removing a consequence that increases behaviour.",
+          "Positive punishment: adding a consequence that decreases behaviour.",
+          "Negative punishment: removing a consequence that decreases behaviour."
+        ],
+        example: "If completing homework leads to praise and this makes the student more likely to complete it again, the praise may act as positive reinforcement.",
+        tip: "Positive means adding; negative means removing. Reinforcement increases behaviour; punishment decreases it."
+      },
+      {
+        title: "Memory and reconstructive processes",
+        explanation: "Memory involves encoding, storing and retrieving information. Remembering is not always an exact reproduction of an original experience.",
+        why: "Prior knowledge, expectations and later information can influence how people interpret and retrieve memories.",
+        points: [
+          "Encoding: transforming information into a form that can be stored.",
           "Storage: retaining information over time.",
           "Retrieval: accessing stored information.",
-          "Attention can influence what information is encoded.",
-          "Retrieval cues may support access to stored information."
-        ]
+          "Schema: an organised framework of prior knowledge.",
+          "Reconstructive memory: remembering through a process influenced by existing knowledge and later information."
+        ],
+        example: "A person's memory of an event may be influenced by the wording of questions asked afterwards.",
+        tip: "Explain the cognitive process and connect it to evidence from a relevant study."
       },
       {
-        title: "3. Reconstructive memory",
-        explanation: "Reconstructive memory means that remembering is not necessarily an exact replay of an event. Recall may be influenced by schemas, expectations and later information.",
-        why: "People use existing knowledge to interpret incomplete information. This can make remembering efficient, but it can also lead to omissions or distortions. The wording of a question or information encountered after an event may influence later recall.",
+        title: "Thinking and decision-making",
+        explanation: "Thinking includes reasoning, judgement and problem-solving. Heuristics are mental shortcuts that can help people make decisions quickly.",
+        why: "Mental shortcuts reduce the effort needed to process information, but they can also lead to systematic errors when information is incomplete.",
         points: [
-          "Schemas are organized structures of prior knowledge.",
-          "Prior expectations may influence interpretation.",
-          "Later information can influence recall.",
-          "Confidence in a memory does not necessarily guarantee accuracy.",
-          "Consider whether a research task reflects everyday remembering."
-        ]
-      },
-      {
-        title: "4. Observational learning",
-        explanation: "Observational learning involves acquiring behaviour by watching other people.",
-        why: "Observing a model allows an individual to learn information without relying entirely on direct trial and error. However, observing a behaviour does not guarantee that it will be copied. Attention, memory, ability and motivation can all influence whether imitation occurs.",
-        points: [
-          "Attention: noticing the model's behaviour.",
-          "Retention: remembering what was observed.",
-          "Reproduction: being able to perform the behaviour.",
-          "Motivation: having a reason to imitate the behaviour.",
-          "Models can influence learning through their behaviour and consequences."
-        ]
-      },
-      {
-        title: "5. Feedback and learning",
-        explanation: "Feedback provides information about performance and can help learners adjust their strategies.",
-        why: "Without useful information about performance, a learner may repeat an ineffective strategy. Specific feedback can identify what needs to change and provide a direction for improvement. Its effectiveness depends on timing, clarity and whether the learner can act on it.",
-        points: [
-          "Specific feedback identifies what was successful or needs improvement.",
-          "Practice can strengthen learning.",
-          "Active retrieval can help learners access information.",
-          "Immediate performance and long-term learning are not identical.",
-          "Motivation and the learning environment also matter."
-        ]
+          "Heuristic: a mental shortcut used in judgement.",
+          "Availability heuristic: judging likelihood based on how easily examples come to mind.",
+          "Confirmation bias: favouring information that supports existing beliefs.",
+          "Cognitive bias: a systematic tendency that can affect judgement."
+        ],
+        example: "After hearing about an unusual event repeatedly in the news, a person may overestimate how frequently it occurs.",
+        tip: "Discuss both the usefulness and limitations of shortcuts in thinking."
       }
-    ],
+    ]
+  }
+];
 
+const studies = [
+  {
+    name: "Cohen et al. (1997)",
+    area: "HEALTH & WELL-BEING",
+    type: "Field research",
+    aim: "To investigate whether psychological stress is associated with susceptibility to the common cold.",
+    method: "Participants completed assessments of stressful life events and were later exposed to a cold virus under controlled conditions.",
+    findings: "Higher levels of psychological stress were associated with a greater likelihood of developing a clinical cold.",
+    conclusion: "The findings support an association between psychological stress and susceptibility to illness.",
+    evaluation: "The study used an objective health outcome and controlled exposure. However, stress is difficult to measure perfectly, and an association alone does not prove that stress directly caused illness."
+  },
+  {
+    name: "Ainsworth et al. (1978)",
+    area: "HUMAN DEVELOPMENT",
+    type: "Structured observation",
+    aim: "To investigate individual differences in infant attachment behaviour.",
+    method: "The Strange Situation involved brief separations and reunions between infants and caregivers in an unfamiliar setting.",
+    findings: "Researchers identified different patterns of attachment-related behaviour, including secure and insecure patterns.",
+    conclusion: "Infant behaviour during separation and reunion can provide evidence about patterns of attachment.",
+    evaluation: "The procedure was systematic and allowed comparisons. However, behaviour may be influenced by culture, the unfamiliar setting and individual differences."
+  },
+  {
+    name: "Bandura, Ross & Ross (1961)",
+    area: "LEARNING & COGNITION",
+    type: "Laboratory experiment",
+    aim: "To investigate whether children could learn aggressive behaviour through observing an adult model.",
+    method: "Children observed an adult behaving aggressively or non-aggressively towards an inflatable doll, and their later behaviour was observed.",
+    findings: "Children who observed the aggressive model displayed more imitative aggressive behaviour than those in the non-aggressive condition.",
+    conclusion: "The findings support observational learning: people may acquire behaviours by watching others.",
+    evaluation: "The experiment offered control over the conditions and demonstrated imitation. However, the artificial setting and short-term behaviour limit conclusions about everyday aggression."
+  },
+  {
+    name: "Loftus & Palmer (1974)",
+    area: "LEARNING & COGNITION",
+    type: "Laboratory experiment",
+    aim: "To investigate whether the wording of questions influences eyewitness memory.",
+    method: "Participants watched films of traffic accidents and answered questions using different verbs to describe the collisions.",
+    findings: "The verb used in the question influenced estimates of vehicle speed. In a later experiment, wording also influenced reports of seeing broken glass.",
+    conclusion: "Post-event information and question wording can influence memory reports.",
+    evaluation: "The study demonstrates how leading questions may affect recall. However, watching a film is not identical to experiencing a real accident, limiting ecological validity."
+  },
+  {
+    name: "Asch (1951)",
+    area: "HUMAN RELATIONSHIPS",
+    type: "Laboratory experiment",
+    aim: "To investigate whether individuals conform to an incorrect majority judgement.",
+    method: "Participants completed a line-judgement task in a group where several confederates gave the same incorrect answer on selected trials.",
+    findings: "Some participants conformed to the incorrect majority on at least some trials.",
+    conclusion: "Group pressure can influence an individual's public judgement, even when the correct answer appears clear.",
+    evaluation: "The controlled procedure helped isolate majority influence. However, the artificial task and historical cultural context limit how broadly the results can be generalised."
+  },
+  {
+    name: "Milgram (1963)",
+    area: "HUMAN RELATIONSHIPS",
+    type: "Laboratory experiment",
+    aim: "To investigate obedience to an authority figure.",
+    method: "Participants believed they were administering increasingly strong electric shocks to another person when instructed by an experimenter. The shocks were not real.",
+    findings: "Many participants continued further than they initially expected under the experimenter's instructions.",
+    conclusion: "Situational pressure and perceived authority can influence obedience.",
+    evaluation: "The research highlighted the influence of authority, but involved serious ethical concerns, including deception and participant distress. Its historical context also matters when interpreting generalisability."
+  },
+  {
+    name: "Baddeley & Hitch (1974)",
+    area: "LEARNING & COGNITION",
+    type: "Cognitive research",
+    aim: "To investigate the structure and functioning of working memory.",
+    method: "Researchers used dual-task experiments to examine how people perform tasks that require holding and processing information at the same time.",
+    findings: "The results challenged the idea of a single, simple short-term memory store and supported a more complex working-memory model.",
+    conclusion: "Working memory involves multiple components that contribute to temporary storage and processing.",
+    evaluation: "The model helped explain complex cognitive tasks, although simplified laboratory tasks cannot represent every aspect of everyday memory."
+  }
+];
+
+const paperQuestions = {
+  paper1: {
+    description: "Paper 1 assesses integration of concepts, content and contexts. Practise definitions, application to unfamiliar situations and concept-based evaluation.",
     questions: [
       {
-        type: "Define · 2 marks",
-        question: "Define cognition.",
-        answer: "Cognition refers to mental processes involved in acquiring, processing, storing and using information, including attention, memory, language and reasoning.",
-        approach: "Give a broad but accurate definition and include relevant examples of cognitive processes."
+        label: "SECTION A · SHORT ANSWER PRACTICE",
+        question: "Explain one difference between the cognitive and biological approaches to understanding behaviour.",
+        answer: "The biological approach explains behaviour through physical processes such as brain activity, hormones and genetics. In contrast, the cognitive approach focuses on mental processes such as memory, perception and attention. For example, anxiety could be investigated through physiological arousal using a biological explanation, or through threatening interpretations of situations using a cognitive explanation.",
+        guidance: "Define both approaches, make the distinction explicit and give a relevant example."
       },
       {
-        type: "Explain · 4 marks",
-        question: "Explain why memory is described as reconstructive.",
-        answer: "Memory is described as reconstructive because recall can involve combining stored information with schemas, expectations and retrieval cues rather than replaying an exact recording. These influences can help individuals interpret incomplete information but may also lead to omissions or distortions.",
-        approach: "Explain how schemas or expectations influence recall and why this can affect accuracy."
+        label: "SECTION B · UNSEEN SITUATION PRACTICE",
+        question: "A student becomes anxious whenever they enter an examination room after repeatedly experiencing stress during tests. Apply classical conditioning to explain this behaviour.",
+        answer: "The examination room may initially have been a neutral stimulus. If it was repeatedly associated with stressful examination experiences, it may become a conditioned stimulus. Anxiety in the room may then function as a conditioned response. This illustrates how an association between stimuli can produce a learned emotional response.",
+        guidance: "Use the details in the scenario. Identify the stimuli and responses rather than giving only a general definition."
       },
       {
-        type: "Application · 6 marks",
-        question: "A student watches a classmate use a revision strategy and then tries it. Apply observational learning to this situation.",
-        answer: "The student may learn by observing a model—the classmate—using the revision strategy. The student must attend to the behaviour and retain information about how to perform it. They must also be able to reproduce the strategy and be motivated to try it. Observational learning therefore provides a way to acquire behaviour without relying entirely on direct trial and error.",
-        approach: "Apply the relevant stages to the actual scenario. Do not merely list the stages without explaining the student's behaviour."
-      },
-      {
-        type: "Evaluate · 6 marks",
-        question: "Evaluate laboratory experiments as a method of investigating memory.",
-        answer: "Laboratory experiments can control conditions and standardize materials, helping researchers isolate variables and replicate procedures. This may strengthen internal validity. However, artificial tasks may not reflect everyday remembering, limiting ecological validity. Participants may also guess the study's aim and change their behaviour. Laboratory experiments can identify effects under controlled conditions, but generalization to everyday memory should be considered carefully.",
-        approach: "Discuss control and ecological validity. Explain how the research setting influences interpretation."
-      },
-      {
-        type: "Discuss · 15 marks",
-        question: "Discuss how cognitive processes can influence learning.",
-        answer: "Cognitive processes influence which information is noticed, interpreted, stored and later retrieved. Attention determines which parts of the environment receive processing, while prior knowledge can help learners organize new material. Memory processes influence whether information can be accessed later, and feedback can help learners adjust their strategies. However, learning is also shaped by social and environmental conditions, including opportunities to practise and observe others. Research may use simplified tasks that do not fully represent real-world learning. Overall, cognitive explanations are valuable because they describe the mental processes involved, but they should be considered alongside the context in which learning takes place.",
-        approach: "Explain several cognitive processes and connect them to learning. Include limitations and an overall judgement."
+        label: "SECTION C · EXTENDED RESPONSE PRACTICE",
+        question: "Discuss how one psychological concept can be used to understand human relationships.",
+        answer: "The concept of perspective can be used to understand how individuals interpret the behaviour of others. For example, two people may interpret the same message differently because they have different expectations and experiences. This may contribute to misunderstandings. However, psychological explanations should also consider social and cultural context, because interpretations are not formed in isolation. Therefore, perspective is useful for understanding relationships, but it is not a complete explanation on its own.",
+        guidance: "Define the concept, apply it to a context, support your argument with relevant research and evaluate the limits of the explanation."
       }
-    ],
-
-    research: [
+    ]
+  },
+  paper2: {
+    description: "Paper 2 focuses on applying concepts and content to research contexts. Practise describing class practicals and evaluating unseen research.",
+    questions: [
       {
-        title: "Research practical: Experiment",
-        text: "Know your actual class experiment: aim, independent variable, dependent variable, experimental design, sample, procedure, controls, ethical safeguards and findings."
+        label: "SECTION A · CLASS PRACTICAL",
+        question: "A student conducted a questionnaire about communication styles and attraction. Explain one strength and one limitation of using a questionnaire.",
+        answer: "One strength is that a questionnaire can collect responses from several participants in a relatively standardised way, making comparisons easier. One limitation is that participants may provide socially desirable answers or misunderstand questions, reducing the validity of the findings.",
+        guidance: "Refer to the actual method and explain how the strength or limitation affects the data."
       },
       {
-        title: "Demand characteristics",
-        text: "Participants may guess the aim of an experiment and alter their behaviour. Consider how this could influence the dependent variable."
+        label: "SECTION A · CLASS PRACTICAL",
+        question: "Explain one ethical consideration when conducting an interview about personal well-being.",
+        answer: "Confidentiality is important because participants may share sensitive personal information. The researcher should protect identifying details, store responses securely and explain how the information will be used. Participants should also understand that they can decline to answer questions or withdraw.",
+        guidance: "Name the ethical principle and explain the practical steps used to protect participants."
       },
       {
-        title: "Measurement",
-        text: "Ask whether the task measures learning, immediate performance, memory accuracy or confidence. These are not necessarily the same thing."
+        label: "SECTION B · UNSEEN STUDY EVALUATION",
+        question: "A researcher claims that a correlation between time spent studying and examination performance proves that studying causes higher marks. Evaluate this conclusion using the concept of causality.",
+        answer: "The conclusion is too strong because correlation does not establish causation. Other variables, such as prior ability, access to resources or motivation, may influence both study time and examination performance. The direction of the relationship may also be unclear. The researcher can conclude that the variables are associated, but cannot establish a causal relationship from correlation alone.",
+        guidance: "Identify the claim, explain why the evidence does or does not support it, and consider alternative explanations."
       }
     ]
   }
 };
 
+const unitGrid = document.getElementById("unitGrid");
+const unitContent = document.getElementById("unitContent");
+const unitTitle = document.getElementById("unitTitle");
+const unitTag = document.getElementById("unitTag");
+const searchInput = document.getElementById("searchInput");
+const studyGrid = document.getElementById("studyGrid");
+const paperContent = document.getElementById("paperContent");
 
-// ==========================================
-// WEBSITE INTERACTIVITY
-// ==========================================
+let currentUnit = 0;
 
-const reader = document.getElementById("unit-reader");
-const readerContent = document.getElementById("reader-content");
-
-let currentUnit = null;
-let currentTab = "notes";
-
-function escapeHTML(text) {
-  return String(text).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[character]);
+function makeElement(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
 }
 
+function renderUnit(index) {
+  currentUnit = index;
+  const unit = units[index];
 
-// OPEN A UNIT
+  unitTitle.textContent = unit.title;
+  unitTag.textContent = unit.tag;
+  searchInput.value = "";
 
-function openUnit(unitKey) {
-  currentUnit = unitKey;
-  currentTab = "notes";
-
-  const unit = units[unitKey];
-
-  document.getElementById("reader-kicker").textContent = unit.kicker;
-  document.getElementById("reader-title").textContent = unit.title;
-  document.getElementById("reader-intro").textContent = unit.intro;
-
-  document.querySelectorAll(".reader-tab").forEach(tab => {
-    tab.classList.toggle("active", tab.dataset.tab === "notes");
+  document.querySelectorAll(".unit-card").forEach((card, i) => {
+    card.classList.toggle("active", i === index);
   });
 
-  renderContent();
+  displayTopics(unit.topics);
 
-  reader.classList.remove("hidden");
-
-  reader.scrollIntoView({
+  document.getElementById("study").scrollIntoView({
     behavior: "smooth",
     block: "start"
   });
 }
 
+function displayTopics(topics) {
+  unitContent.innerHTML = "";
 
-// DISPLAY THE SELECTED TAB
-
-function renderContent() {
-  const unit = units[currentUnit];
-
-  if (currentTab === "notes") {
-    renderNotes(unit);
+  if (topics.length === 0) {
+    unitContent.appendChild(
+      makeElement("p", "muted", "No matching topics. Try another search.")
+    );
+    return;
   }
 
-  if (currentTab === "questions") {
-    renderQuestions(unit);
-  }
+  topics.forEach(topic => {
+    const card = makeElement("article", "note-card");
+    card.appendChild(makeElement("h3", "", topic.title));
 
-  if (currentTab === "research") {
-    renderResearch(unit);
-  }
+    card.appendChild(makeElement("h4", "", "UNDERSTANDING THE CONCEPT"));
+    card.appendChild(makeElement("p", "", topic.explanation));
+
+    card.appendChild(makeElement("h4", "", "WHY DOES IT HAPPEN?"));
+    card.appendChild(makeElement("p", "", topic.why));
+
+    card.appendChild(makeElement("h4", "", "KEY IDEAS"));
+    const list = makeElement("ul");
+
+    topic.points.forEach(point => {
+      list.appendChild(makeElement("li", "", point));
+    });
+
+    card.appendChild(list);
+
+    card.appendChild(makeElement("h4", "", "APPLICATION"));
+    card.appendChild(makeElement("p", "", topic.example));
+
+    card.appendChild(
+      makeElement("div", "explanation", "EXAM GUIDANCE: " + topic.tip)
+    );
+
+    unitContent.appendChild(card);
+  });
 }
 
+unitGrid.addEventListener("click", event => {
+  const button = event.target.closest(".unit-card");
+  if (!button) return;
+  renderUnit(Number(button.dataset.unit));
+});
 
-// RENDER NOTES
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
 
-function renderNotes(unit) {
-  readerContent.innerHTML = unit.notes.map((note, index) => `
-    <article class="note-card">
+  const filtered = units[currentUnit].topics.filter(topic => {
+    const searchable = [
+      topic.title,
+      topic.explanation,
+      topic.why,
+      topic.example,
+      topic.tip,
+      ...topic.points
+    ].join(" ").toLowerCase();
 
-      <div class="question-meta">
-        DETAILED NOTE ${String(index + 1).padStart(2, "0")}
-      </div>
+    return searchable.includes(query);
+  });
 
-      <h3>${escapeHTML(note.title)}</h3>
+  displayTopics(filtered);
+});
 
-      <p>${escapeHTML(note.explanation)}</p>
+function renderStudies() {
+  studyGrid.innerHTML = "";
 
-      <h4>WHY DOES THIS HAPPEN?</h4>
+  studies.forEach(study => {
+    const card = makeElement("article", "study-card");
 
-      <p>${escapeHTML(note.why)}</p>
+    card.appendChild(makeElement("span", "study-label", study.area));
+    card.appendChild(makeElement("h3", "", study.name));
+    card.appendChild(makeElement("p", "muted", study.type));
 
-      <h4>IMPORTANT POINTS</h4>
+    const fields = [
+      ["AIM", study.aim],
+      ["METHOD & PROCEDURE", study.method],
+      ["FINDINGS", study.findings],
+      ["CONCLUSION", study.conclusion],
+      ["EVALUATION", study.evaluation]
+    ];
 
-      <ul>
-        ${note.points.map(point =>
-          `<li>${escapeHTML(point)}</li>`
-        ).join("")}
-      </ul>
+    fields.forEach(([heading, content]) => {
+      card.appendChild(makeElement("h4", "", heading));
+      card.appendChild(makeElement("p", "", content));
+    });
 
-    </article>
-  `).join("");
+    studyGrid.appendChild(card);
+  });
 }
 
+function renderPaper(paper) {
+  const data = paperQuestions[paper];
 
-// RENDER QUESTIONS
+  document.querySelectorAll(".paper-tab").forEach(tab => {
+    tab.classList.toggle("active", tab.dataset.paper === paper);
+  });
 
-function renderQuestions(unit) {
-  readerContent.innerHTML = unit.questions.map((question, index) => `
-    <article class="question-card">
+  paperContent.innerHTML = "";
+  paperContent.appendChild(
+    makeElement("p", "paper-description", data.description)
+  );
 
-      <div class="question-meta">
-        ${escapeHTML(question.type)} · QUESTION ${index + 1}
-      </div>
+  data.questions.forEach((item, index) => {
+    const question = makeElement("article", "question");
 
-      <h3>${escapeHTML(question.question)}</h3>
+    question.appendChild(
+      makeElement("p", "question-meta", item.label)
+    );
 
-      <button class="reveal-button">
-        Reveal model answer + explanation
-      </button>
+    question.appendChild(
+      makeElement("strong", "", `${index + 1}. ${item.question}`)
+    );
 
-      <div class="answer-box hidden">
+    const button = makeElement(
+      "button",
+      "answer-button",
+      "Reveal model answer and guidance"
+    );
 
-        <h4>MODEL ANSWER</h4>
+    button.type = "button";
 
-        <p>${escapeHTML(question.answer)}</p>
-
-        <h4>HOW TO APPROACH THIS QUESTION</h4>
-
-        <p>${escapeHTML(question.approach)}</p>
-
-      </div>
-
-    </article>
-  `).join("");
-
-  // REVEAL ANSWERS WHEN CLICKED
-
-  readerContent.querySelectorAll(".reveal-button").forEach(button => {
+    const answer = makeElement("div", "answer");
+    answer.appendChild(
+      makeElement("p", "", "MODEL ANSWER: " + item.answer)
+    );
+    answer.appendChild(
+      makeElement("p", "", "HOW TO APPROACH IT: " + item.guidance)
+    );
 
     button.addEventListener("click", () => {
-
-      const answer = button.nextElementSibling;
-      const opening = answer.classList.contains("hidden");
-
-      answer.classList.toggle("hidden");
-
-      button.textContent = opening
+      const visible = answer.classList.toggle("show");
+      button.textContent = visible
         ? "Hide model answer"
-        : "Reveal model answer + explanation";
-
+        : "Reveal model answer and guidance";
     });
 
+    question.appendChild(button);
+    question.appendChild(answer);
+    paperContent.appendChild(question);
   });
 }
 
-
-// RENDER RESEARCH INFORMATION
-
-function renderResearch(unit) {
-  readerContent.innerHTML = unit.research.map(item => `
-    <article class="research-card">
-
-      <h3>${escapeHTML(item.title)}</h3>
-
-      <p>${escapeHTML(item.text)}</p>
-
-    </article>
-  `).join("");
-}
-
-
-// CLICKING THE FIVE UNIT BUTTONS
-
-document.querySelectorAll(".unit-card").forEach(card => {
-
-  card.addEventListener("click", () => {
-    openUnit(card.dataset.unit);
-  });
-
-});
-
-
-// CLOSE THE UNIT
-
-document.getElementById("close-reader").addEventListener("click", () => {
-  reader.classList.add("hidden");
-});
-
-
-// CHANGE BETWEEN NOTES, QUESTIONS AND RESEARCH
-
-document.querySelectorAll(".reader-tab").forEach(tab => {
-
+document.querySelectorAll(".paper-tab").forEach(tab => {
   tab.addEventListener("click", () => {
-
-    currentTab = tab.dataset.tab;
-
-    document.querySelectorAll(".reader-tab").forEach(item => {
-      item.classList.toggle("active", item === tab);
-    });
-
-    renderContent();
-
+    renderPaper(tab.dataset.paper);
   });
-
 });
 
-
-// ==========================================
-// PAPER 1 AND PAPER 2 STRATEGIES
-// ==========================================
-
-const paperStrategies = {
-
-  paper1: `
-    <h3>Paper 1: How to answer</h3>
-
-    <h4>Section A — Short-answer questions</h4>
-
-    <p>Answer the command term directly. Give an accurate definition
-    or explanation and develop it with relevant psychological detail.</p>
-
-    <ul>
-      <li><b>Define:</b> Give the precise meaning of the term.</li>
-      <li><b>Explain:</b> Show how or why a psychological process occurs.</li>
-      <li><b>Evidence:</b> Use relevant theory or research where it strengthens your answer.</li>
-    </ul>
-
-    <h4>Section B — Application questions</h4>
-
-    <p>Use the information in the scenario throughout your answer.</p>
-
-    <p>A useful structure is:</p>
-
-    <ul>
-      <li>Identify the relevant psychological concept or theory.</li>
-      <li>Explain the concept accurately.</li>
-      <li>Identify specific details from the scenario.</li>
-      <li>Explain how those details demonstrate the concept.</li>
-    </ul>
-
-    <p>Avoid writing a generic paragraph that could fit any scenario.
-    The examiner needs to see that you understand the situation.</p>
-
-    <h4>Section C — Extended response</h4>
-
-    <p>Build a focused argument rather than simply listing information.</p>
-
-    <ul>
-      <li>Introduce the central concept and address the question.</li>
-      <li>Explain relevant psychological content.</li>
-      <li>Use evidence to support your explanation.</li>
-      <li>Evaluate strengths, limitations and alternative explanations.</li>
-      <li>End with a justified overall judgement.</li>
-    </ul>
-
-    <h4>Before finishing your answer, ask yourself:</h4>
-
-    <p>Have I addressed the exact wording of the question?
-    Have I explained why the psychological process happens?
-    Have I used relevant evidence?
-    Have I evaluated rather than merely described?</p>
-  `,
-
-  paper2: `
-    <h3>Paper 2: How to answer</h3>
-
-    <h4>Section A — Class practicals</h4>
-
-    <p>Prepare a separate revision sheet for each of your class practicals.</p>
-
-    <ul>
-      <li>Aim and research question.</li>
-      <li>Research method.</li>
-      <li>Target population and sample.</li>
-      <li>Sampling technique.</li>
-      <li>Materials and procedure.</li>
-      <li>Operationalization and data collection.</li>
-      <li>Ethical considerations.</li>
-      <li>Results, interpretation and limitations.</li>
-    </ul>
-
-    <p>Use the actual details from your class practical. Do not
-    substitute a textbook example for the investigation you completed.</p>
-
-    <h4>Section B — Unseen research study</h4>
-
-    <p>Read the research stimulus carefully before writing.
-    Identify the aim, participants, method, procedure, measures
-    and findings.</p>
-
-    <p>Connect the study to relevant psychological concepts:</p>
-
-    <ul>
-      <li><b>Bias:</b> Could sampling or researcher expectations affect the findings?</li>
-      <li><b>Causality:</b> Does the design support cause and effect?</li>
-      <li><b>Measurement:</b> Does the measure capture the intended concept?</li>
-      <li><b>Perspective:</b> Whose experiences or viewpoints are represented?</li>
-      <li><b>Responsibility:</b> Were participants' rights and welfare protected?</li>
-    </ul>
-
-    <h4>The strongest evaluation structure</h4>
-
-    <p>Identify a specific feature of the study → connect it to a
-    psychological concept → explain the consequence for interpreting
-    the findings.</p>
-
-    <p>Do not memorize a generic evaluation paragraph and force it
-    into an unseen study. Every point should relate to the stimulus.</p>
-  `
-};
-
-
-// SHOW PAPER STRATEGIES
-
-document.querySelectorAll("[data-paper]").forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    const panel = document.getElementById("paper-strategy");
-
-    panel.innerHTML = paperStrategies[button.dataset.paper];
-
-    panel.classList.remove("hidden");
-
-    panel.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest"
-    });
-
-  });
-
-});
+renderUnit(0);
+renderStudies();
+renderPaper("paper1");
