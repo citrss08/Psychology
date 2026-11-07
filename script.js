@@ -287,3 +287,4 @@ const course = {
       }
     ]
   },
+const course = { // all five units and their content }; // ← paste the interaction code AFTER this line // Psychology website interactions const byId = id => document.getElementById(id); // ...rest of the code I sent
