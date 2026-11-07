@@ -4,176 +4,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="IB Psychology SL 2027 study platform">
+  <meta name="description" content="IB Psychology SL first assessment 2027 — notes, research studies, exam practice and revision tools based on class handouts.">
   <title>Psychology SL | IB 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#" aria-label="Psychology home">
+    <a class="brand" href="#home" aria-label="Psychology study home">
       <span class="brand-mark">Ψ</span>
-      <span>PSYCHOLOGY <small>IB DIPLOMA · SL 2027</small></span>
+      <span class="brand-name">PSYCHOLOGY <small>IB DIPLOMA · SL 2027</small></span>
     </a>
-    <span class="top-label">FIRST ASSESSMENT 2027</span>
+    <div class="topbar-right"><span class="top-label">FIRST ASSESSMENT 2027</span><span class="top-dot"></span><span class="top-label">STUDY EDITION</span></div>
   </header>
 
-  <main>
+  <main id="home">
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">YOUR STUDY SPACE</p>
-        <h1>Understand the mind.<br><em>Think critically.</em></h1>
-        <p class="hero-description">
-          A structured guide to IB Psychology SL, with explanations,
-          research examples, exam practice and practical guidance.
-        </p>
-        <button class="primary-button" data-go="investigations">
-          Start studying <span>→</span>
-        </button>
+        <p class="eyebrow">YOUR PSYCHOLOGY STUDY SPACE</p>
+        <h1>Understand the mind.<br><em>Question the evidence.</em></h1>
+        <p class="hero-description">A structured study companion built around your class notes: clear explanations, research studies, evaluation, and IB-style exam practice.</p>
+        <a class="primary-button" href="#course">Explore course content <span>↓</span></a>
       </div>
-      <div class="hero-symbol" aria-hidden="true">Ψ</div>
+      <div class="hero-art" aria-hidden="true"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="hero-psi">Ψ</span><span class="hero-caption">BEHAVIOUR<br>·<br>COGNITION<br>·<br>CONTEXT</span></div>
+      <div class="hero-index">COURSE GUIDE <span>01—05</span></div>
     </section>
 
-    <section class="quick-stats">
-      <div><strong>3</strong><span>Approaches</span></div>
+    <section class="stats" aria-label="Course overview">
+      <div><strong>3</strong><span>Content approaches</span></div>
       <div><strong>4</strong><span>Contexts</span></div>
       <div><strong>6</strong><span>Key concepts</span></div>
-      <div><strong>2</strong><span>External papers</span></div>
+      <div><strong>2</strong><span>SL exam papers</span></div>
     </section>
 
-    <section class="section-heading">
-      <div>
-        <p class="eyebrow">COURSE CONTENT</p>
-        <h2>Your learning units</h2>
-        <p>Choose a unit to explore explanations, examples and exam questions.</p>
+    <section id="course" class="course-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE COURSE</p><h2>Choose a study area</h2><p>Your teacher's materials are grouped into five connected sections. Switch between notes, studies, practice and quick checks.</p></div>
+        <div class="course-note"><span class="note-dot"></span> Class-note based</div>
+      </div>
+      <div class="unit-grid" id="unit-grid">
+        <button class="unit-card active" data-unit="investigations"><span class="unit-number">01</span><span class="unit-icon">⌕</span><strong>Psychological investigations</strong><span class="unit-summary">Methods, sampling, data, evaluation and concepts</span><span class="card-arrow">Open section ↗</span></button>
+        <button class="unit-card" data-unit="health"><span class="unit-number">02</span><span class="unit-icon">♡</span><strong>Health and well-being</strong><span class="unit-summary">Depression, health problems, stress and treatment</span><span class="card-arrow">Open section ↗</span></button>
+        <button class="unit-card" data-unit="development"><span class="unit-number">03</span><span class="unit-icon">↗</span><strong>Human development</strong><span class="unit-summary">Cognitive development, attachment and identity</span><span class="card-arrow">Open section ↗</span></button>
+        <button class="unit-card" data-unit="relationships"><span class="unit-number">04</span><span class="unit-icon">◎</span><strong>Human relationships</strong><span class="unit-summary">Group behaviour, attraction and communication</span><span class="card-arrow">Open section ↗</span></button>
+        <button class="unit-card" data-unit="learning"><span class="unit-number">05</span><span class="unit-icon">⌘</span><strong>Learning and cognition</strong><span class="unit-summary">Learning theories, schemas, biases and thinking</span><span class="card-arrow">Open section ↗</span></button>
       </div>
     </section>
-
-    <nav class="unit-grid" aria-label="Study units">
-      <button class="unit-card active" data-unit="investigations">
-        <span class="unit-number">01</span>
-        <span class="unit-icon">⌕</span>
-        <strong>Psychological investigations</strong>
-        <span>Research methods, ethics, design and analysis</span>
-        <span class="card-arrow">Explore →</span>
-      </button>
-      <button class="unit-card" data-unit="health">
-        <span class="unit-number">02</span>
-        <span class="unit-icon">♡</span>
-        <strong>Health and well-being</strong>
-        <span>Stress, health, behaviour and well-being</span>
-        <span class="card-arrow">Explore →</span>
-      </button>
-      <button class="unit-card" data-unit="development">
-        <span class="unit-number">03</span>
-        <span class="unit-icon">↗</span>
-        <strong>Human development</strong>
-        <span>How people change across the lifespan</span>
-        <span class="card-arrow">Explore →</span>
-      </button>
-      <button class="unit-card" data-unit="relationships">
-        <span class="unit-number">04</span>
-        <span class="unit-icon">◎</span>
-        <strong>Human relationships</strong>
-        <span>Attraction, relationships and social behaviour</span>
-        <span class="card-arrow">Explore →</span>
-      </button>
-      <button class="unit-card" data-unit="learning">
-        <span class="unit-number">05</span>
-        <span class="unit-icon">⌘</span>
-        <strong>Learning and cognition</strong>
-        <span>Memory, thinking, learning and decision-making</span>
-        <span class="card-arrow">Explore →</span>
-      </button>
-    </nav>
 
     <section id="study-area" class="study-area">
       <div class="study-header">
-        <div>
-          <p class="eyebrow" id="unit-eyebrow">UNIT 01</p>
-          <h2 id="unit-title">Psychological investigations</h2>
-          <p id="unit-description"></p>
-        </div>
+        <div><p class="eyebrow" id="unit-eyebrow">UNIT 01</p><h2 id="unit-title">Psychological investigations</h2><p id="unit-description"></p></div>
         <span class="unit-tag" id="unit-tag">RESEARCH METHODS</span>
       </div>
-
-      <div class="tab-bar" role="tablist" aria-label="Unit materials">
-        <button class="tab active" data-tab="notes" role="tab">Study notes</button>
-        <button class="tab" data-tab="research" role="tab">Research examples</button>
-        <button class="tab" data-tab="practice" role="tab">Exam practice</button>
+      <div class="study-tools">
+        <div class="tab-bar" role="tablist" aria-label="Study materials">
+          <button class="tab active" data-tab="notes" role="tab" aria-selected="true">Study notes</button>
+          <button class="tab" data-tab="studies" role="tab" aria-selected="false">Research studies</button>
+          <button class="tab" data-tab="practice" role="tab" aria-selected="false">Exam practice</button>
+          <button class="tab" data-tab="quiz" role="tab" aria-selected="false">Quick quiz</button>
+        </div>
+        <div class="tool-row"><label class="search-box"><span>⌕</span><input id="course-search" type="search" placeholder="Search this section..." aria-label="Search current section"></label><span id="content-count" class="content-count"></span><div class="expand-controls"><button id="expand-all" class="text-button" type="button">Expand all</button><button id="collapse-all" class="text-button" type="button">Collapse all</button></div></div>
       </div>
-
-      <div id="unit-content" class="unit-content"></div>
+      <div id="unit-content" class="unit-content" aria-live="polite"></div>
     </section>
 
     <section class="concept-section">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">THINK LIKE A PSYCHOLOGIST</p>
-          <h2>The six key concepts</h2>
-          <p>Use these concepts to analyse and evaluate psychological research.</p>
-        </div>
-      </div>
+      <div class="section-heading"><div><p class="eyebrow">A THREAD THROUGH THE COURSE</p><h2>The six psychological concepts</h2><p>Use these concepts to connect research methods, approaches and contexts rather than treating topics as isolated facts.</p></div></div>
       <div class="concept-grid">
-        <article><span>01</span><h3>Bias</h3><p>Systematic influences that may distort research or interpretation.</p></article>
-        <article><span>02</span><h3>Causality</h3><p>Whether one variable can be said to cause a change in another.</p></article>
-        <article><span>03</span><h3>Change</h3><p>How psychological characteristics and behaviour develop over time.</p></article>
-        <article><span>04</span><h3>Measurement</h3><p>How psychological variables are defined and measured.</p></article>
-        <article><span>05</span><h3>Perspective</h3><p>How different viewpoints explain behaviour and mental processes.</p></article>
-        <article><span>06</span><h3>Responsibility</h3><p>Ethical obligations and the impact of psychological knowledge.</p></article>
+        <article><span>01</span><h3>Bias</h3><p>How non-objective influences can shape research, interpretation and behaviour.</p></article>
+        <article><span>02</span><h3>Causality</h3><p>Whether evidence supports a cause-and-effect explanation.</p></article>
+        <article><span>03</span><h3>Change</h3><p>How behaviour and psychological processes develop or are modified.</p></article>
+        <article><span>04</span><h3>Measurement</h3><p>How abstract psychological variables are operationalised and assessed.</p></article>
+        <article><span>05</span><h3>Perspective</h3><p>How different approaches and cultural viewpoints explain behaviour.</p></article>
+        <article><span>06</span><h3>Responsibility</h3><p>Ethical obligations and the consequences of psychological research.</p></article>
       </div>
     </section>
 
-    <section class="assessment-section">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">EXAM PREPARATION</p>
-          <h2>Know your assessment</h2>
-          <p>IB Psychology SL first assessment 2027.</p>
-        </div>
-      </div>
+    <section class="assessment-section" id="assessment">
+      <div class="section-heading"><div><p class="eyebrow">SL · FIRST ASSESSMENT 2027</p><h2>Know your assessment</h2><p>Keep the SL assessment structure separate from older course materials and HL-only requirements.</p></div></div>
       <div class="assessment-grid">
-        <article class="assessment-card">
-          <span class="assessment-label">EXTERNAL ASSESSMENT</span>
-          <h3>Paper 1</h3>
-          <strong>1 hour 30 minutes</strong>
-          <p>Short-answer questions, application to an unseen situation, and a concept-based extended response.</p>
-          <ul>
-            <li>Section A: content knowledge</li>
-            <li>Section B: context application</li>
-            <li>Section C: concept-based response</li>
-          </ul>
-        </article>
-        <article class="assessment-card">
-          <span class="assessment-label">EXTERNAL ASSESSMENT</span>
-          <h3>Paper 2</h3>
-          <strong>1 hour 30 minutes</strong>
-          <p>Questions about your class practicals and evaluation of an unseen research study.</p>
-          <ul>
-            <li>Section A: class practicals</li>
-            <li>Section B: unseen research study</li>
-            <li>Apply at least two relevant concepts</li>
-          </ul>
-        </article>
-        <article class="assessment-card">
-          <span class="assessment-label">INTERNAL ASSESSMENT</span>
-          <h3>Research proposal</h3>
-          <strong>30% of final grade</strong>
-          <p>Design a research proposal to investigate a population of interest using one of the taught research methods.</p>
-          <ul>
-            <li>24 marks</li>
-            <li>Approximately 20 hours</li>
-            <li>One of four research methods</li>
-          </ul>
-        </article>
+        <article class="assessment-card"><span class="assessment-label">EXTERNAL · 35%</span><h3>Paper 1</h3><strong>1 hour 30 minutes · 35 marks</strong><p>Three sections testing content knowledge, application to contexts and conceptual thinking.</p><ul><li><b>Section A:</b> two compulsory short-answer questions from two of the three content areas.</li><li><b>Section B:</b> two compulsory questions applying content to unseen situations.</li><li><b>Section C:</b> one concept-based extended response from a choice of two.</li></ul></article>
+        <article class="assessment-card"><span class="assessment-label">EXTERNAL · 35%</span><h3>Paper 2</h3><strong>1 hour 30 minutes · 35 marks</strong><p>Focuses on the class practicals and critical evaluation of research.</p><ul><li><b>Section A:</b> four compulsory questions focused on class practicals.</li><li><b>Section B:</b> evaluate an unseen research study with reference to two or more concepts.</li></ul></article>
+        <article class="assessment-card"><span class="assessment-label">INTERNAL · 30%</span><h3>Research proposal</h3><strong>24 marks · approximately 20 hours</strong><p>Design a proposal to investigate a population of interest using one of the four class-practical methods.</p><ul><li>Experiment</li><li>Interview</li><li>Observation</li><li>Survey / questionnaire</li></ul><p class="mini-note">The task is to design and justify a proposal; it is not a requirement to carry out the study.</p></article>
       </div>
-      <p class="assessment-note">SL students do not sit Paper 3. Always check the latest subject guide and your teacher's instructions.</p>
+      <div class="assessment-footnote"><b>SL note:</b> Paper 3 is an HL paper, not part of SL assessment. Your uploaded Data Interpretation chapter is retained here as a useful research-method reference; the new guide identifies data analysis and interpretation as directly assessed at HL.</div>
+      <a class="guide-link" href="https://ibo.org/globalassets/new-structure/university-admission/pdfs/subject-guides/psychology-first-assessment-2027-guide-sbs.pdf" target="_blank" rel="noopener">IB Psychology subject guide · first assessment 2027 ↗</a>
     </section>
 
-    <footer>
-      <span>PSYCHOLOGY · IB DIPLOMA 2027</span>
-      <span>Understand · Apply · Evaluate</span>
-    </footer>
+    <footer><span>PSYCHOLOGY · IB DIPLOMA SL · 2027</span><span>Understand · Apply · Evaluate</span><a href="#home">Back to top ↑</a></footer>
   </main>
 </body>
 </html>
