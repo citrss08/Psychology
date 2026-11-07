@@ -1,25 +1,334 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Psychology SL · 2027 Study Garden</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peony Psychology | IB Psychology SL 2027</title>
+  <meta name="description" content="An interactive IB Psychology SL study website for the 2027 syllabus.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
+
 <body>
-<header class="hero" id="top">
-  <p class="kicker">IB Psychology SL · exams 2027</p>
-  <h1>Study Garden</h1>
-  <p class="lead">Notes that explain <em>why</em>, questions with model answers, and a plan for every command term. Pick a unit to begin.</p>
-  <nav id="units" aria-label="Units"></nav>
-  <button class="ghost" id="examBtn">How Paper 1 &amp; Paper 2 work</button>
+
+<header class="header">
+  <a href="#" class="logo">
+    <span class="logo-flower">✿</span>
+    <span>peony <b>psychology</b>
+      <small>IBDP PSYCHOLOGY · STANDARD LEVEL · 2027</small>
+    </span>
+  </a>
+
+  <nav>
+    <a href="#units">Study units</a>
+    <a href="#papers">Exam preparation</a>
+    <a href="#concepts">Key concepts</a>
+  </nav>
 </header>
-<main id="view" tabindex="-1"></main>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">YOUR PSYCHOLOGY STUDY SPACE</p>
+
+      <h1>Understand the mind.<br>
+        <em>Understand the why.</em>
+      </h1>
+
+      <p class="hero-description">
+        Explore psychological theories, understand human behaviour,
+        investigate research and develop the skills to write stronger
+        IB Psychology answers.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#units" class="primary-button">Explore the units ↗</a>
+        <a href="#papers" class="secondary-button">Prepare for exams ↓</a>
+      </div>
+
+      <p class="hero-caption">✧ Designed for the first assessment 2027</p>
+    </div>
+
+    <div class="hero-art">
+      <div class="flower-circle"></div>
+      <div class="flower-circle inner"></div>
+      <span class="big-flower">✿</span>
+      <span class="small-flower">✿</span>
+      <span class="sparkle sparkle-one">✧</span>
+      <span class="sparkle sparkle-two">✦</span>
+      <span class="flower-caption">curiosity · evidence · understanding</span>
+    </div>
+  </section>
+
+  <!-- QUICK INFORMATION -->
+  <section class="quick-info">
+    <div><strong>05</strong><span>Study sections</span></div>
+    <div><strong>02</strong><span>Exam papers</span></div>
+    <div><strong>06</strong><span>Key concepts</span></div>
+    <div><strong>2027</strong><span>First assessment</span></div>
+  </section>
+
+  <!-- FIVE UNITS -->
+  <section class="section" id="units">
+
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">THE STUDY LIBRARY</p>
+        <h2>Choose your area of study.</h2>
+      </div>
+      <p>Each section contains explanations, psychological research,
+        practice questions and model answers.</p>
+    </div>
+
+    <div class="unit-grid">
+
+      <button class="unit-card rose" data-unit="investigations">
+        <span class="unit-number">01 / METHODS</span>
+        <span class="unit-icon">⌕</span>
+        <h3>Psychological<br>Investigations</h3>
+        <p>Research methods, ethics, practicals, variables and evaluation.</p>
+        <span class="open-link">Explore section ↗</span>
+      </button>
+
+      <button class="unit-card peach" data-unit="health">
+        <span class="unit-number">02 / CONTEXT</span>
+        <span class="unit-icon">♡</span>
+        <h3>Health &<br>Well-being</h3>
+        <p>Biological, cognitive and sociocultural influences on health.</p>
+        <span class="open-link">Explore section ↗</span>
+      </button>
+
+      <button class="unit-card lilac" data-unit="development">
+        <span class="unit-number">03 / CONTEXT</span>
+        <span class="unit-icon">❀</span>
+        <h3>Human<br>Development</h3>
+        <p>How people develop, learn and change throughout their lives.</p>
+        <span class="open-link">Explore section ↗</span>
+      </button>
+
+      <button class="unit-card sage" data-unit="relationships">
+        <span class="unit-number">04 / CONTEXT</span>
+        <span class="unit-icon">⌁</span>
+        <h3>Human<br>Relationships</h3>
+        <p>Attraction, communication, relationships and social interaction.</p>
+        <span class="open-link">Explore section ↗</span>
+      </button>
+
+      <button class="unit-card mauve" data-unit="learning">
+        <span class="unit-number">05 / CONTEXT</span>
+        <span class="unit-icon">✧</span>
+        <h3>Learning &<br>Thinking</h3>
+        <p>Learning, cognition, memory and information processing.</p>
+        <span class="open-link">Explore section ↗</span>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- UNIT CONTENT APPEARS HERE -->
+  <section id="unit-reader" class="unit-reader hidden">
+    <div class="reader-heading">
+      <div>
+        <p class="eyebrow" id="reader-kicker">UNIT NOTES</p>
+        <h2 id="reader-title"></h2>
+        <p id="reader-intro"></p>
+      </div>
+      <button id="close-reader" class="close-button">×</button>
+    </div>
+
+    <div class="reader-tabs">
+      <button class="reader-tab active" data-tab="notes">Detailed notes</button>
+      <button class="reader-tab" data-tab="questions">Practice questions</button>
+      <button class="reader-tab" data-tab="research">Research & evaluation</button>
+    </div>
+
+    <div id="reader-content"></div>
+  </section>
+
+  <!-- EXAM PREPARATION -->
+  <section class="exam-section" id="papers">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">EXAM PREPARATION</p>
+        <h2>Master the exam structure.</h2>
+      </div>
+      <p>Learn what each question requires and how to construct
+        a response that addresses the command term.</p>
+    </div>
+
+    <div class="paper-grid">
+
+      <article class="paper-card">
+        <div class="paper-label">EXTERNAL ASSESSMENT · 01</div>
+        <h3>Paper 1</h3>
+        <p class="paper-subtitle">Approaches, concepts and contexts</p>
+
+        <div class="paper-stat">
+          <strong>1 hour 30 minutes</strong>
+          <span>35 marks · 35% of SL grade</span>
+        </div>
+
+        <div class="paper-detail">
+          <h4>Section A · Short-answer questions</h4>
+          <p>Two compulsory 4-mark questions focusing on the
+            psychological approaches.</p>
+        </div>
+
+        <div class="paper-detail">
+          <h4>Section B · Application questions</h4>
+          <p>Two compulsory 6-mark questions requiring you to
+            apply psychological knowledge to an unfamiliar situation.</p>
+        </div>
+
+        <div class="paper-detail">
+          <h4>Section C · Extended response</h4>
+          <p>One 15-mark concept-based extended response.</p>
+        </div>
+
+        <button class="outline-button" data-paper="paper1">
+          Learn Paper 1 strategies ↗
+        </button>
+      </article>
+
+      <article class="paper-card">
+        <div class="paper-label">EXTERNAL ASSESSMENT · 02</div>
+        <h3>Paper 2</h3>
+        <p class="paper-subtitle">Research methods and practical work</p>
+
+        <div class="paper-stat">
+          <strong>1 hour 30 minutes</strong>
+          <span>35 marks · 35% of SL grade</span>
+        </div>
+
+        <div class="paper-detail">
+          <h4>Section A · Class practicals</h4>
+          <p>Four compulsory questions based on the practical
+            investigations completed during your course.</p>
+        </div>
+
+        <div class="paper-detail">
+          <h4>Section B · Unseen research study</h4>
+          <p>Evaluate an unfamiliar research study using relevant
+            psychological concepts.</p>
+        </div>
+
+        <div class="paper-detail">
+          <h4>What to prepare</h4>
+          <p>Research aims, methods, procedures, ethics, sampling,
+            operationalization and limitations.</p>
+        </div>
+
+        <button class="outline-button" data-paper="paper2">
+          Learn Paper 2 strategies ↗
+        </button>
+      </article>
+
+    </div>
+
+    <div id="paper-strategy" class="paper-strategy hidden"></div>
+  </section>
+
+  <!-- COMMAND TERMS -->
+  <section class="section command-section">
+    <p class="eyebrow">ANSWER WRITING</p>
+    <h2>Understand the command terms.</h2>
+    <p class="section-intro">The command term tells you what kind of
+      thinking the examiner expects.</p>
+
+    <div class="command-grid">
+      <article>
+        <span>01</span>
+        <h3>Define</h3>
+        <p>Give the precise meaning of a psychological term or concept.</p>
+        <b>Approach:</b>
+        <p>Provide a clear definition. Avoid unnecessary background information.</p>
+      </article>
+
+      <article>
+        <span>02</span>
+        <h3>Explain</h3>
+        <p>Make an idea understandable by showing how or why it occurs.</p>
+        <b>Approach:</b>
+        <p>Explain the mechanism, then develop it using relevant details.</p>
+      </article>
+
+      <article>
+        <span>03</span>
+        <h3>Apply</h3>
+        <p>Use psychological knowledge in a particular situation.</p>
+        <b>Approach:</b>
+        <p>Connect specific details from the scenario to the relevant theory.</p>
+      </article>
+
+      <article>
+        <span>04</span>
+        <h3>Evaluate</h3>
+        <p>Consider the strengths, limitations and implications of an idea.</p>
+        <b>Approach:</b>
+        <p>Explain why each strength or limitation affects the conclusion.</p>
+      </article>
+
+      <article>
+        <span>05</span>
+        <h3>Discuss</h3>
+        <p>Present a balanced and developed argument.</p>
+        <b>Approach:</b>
+        <p>Explore different perspectives and finish with a justified judgement.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- KEY CONCEPTS -->
+  <section class="section concepts-section" id="concepts">
+    <p class="eyebrow">THE THINKING FRAMEWORK</p>
+    <h2>Six psychological concepts.</h2>
+    <p class="section-intro">Connect these concepts to the psychological
+      content you study. They should inform your thinking, not simply
+      appear as memorised definitions.</p>
+
+    <div class="concept-grid">
+      <article><span>01</span><h3>Bias</h3><p>Systematic influences that may distort research or interpretation.</p></article>
+      <article><span>02</span><h3>Causality</h3><p>Whether evidence supports a cause-and-effect relationship.</p></article>
+      <article><span>03</span><h3>Change</h3><p>How and why behaviour and mental processes transform over time.</p></article>
+      <article><span>04</span><h3>Measurement</h3><p>How psychological variables are defined and assessed.</p></article>
+      <article><span>05</span><h3>Perspective</h3><p>How different approaches explain human behaviour.</p></article>
+      <article><span>06</span><h3>Responsibility</h3><p>Ethical obligations when conducting and applying research.</p></article>
+    </div>
+  </section>
+
+  <!-- STUDY TIP -->
+  <section class="study-tip">
+    <div class="tip-flower">✿</div>
+    <div>
+      <p class="eyebrow">THE PEONY STUDY METHOD</p>
+      <h2>Don't just memorise.<br><em>Understand the why.</em></h2>
+      <p>For every psychological concept, ask yourself:
+        What is it? How does it work? Why does it happen?
+        What evidence supports it? What are its limitations?
+        How can I apply it to a real situation?</p>
+    </div>
+  </section>
+
+</main>
+
 <footer>
-  <p>Check every unit against your official IB Psychology guide: the 2027 syllabus is new, so treat these notes as a base to build on.</p>
+  <a href="#" class="logo">
+    <span class="logo-flower">✿</span>
+    <span>peony <b>psychology</b>
+      <small>LEARN WITH CURIOSITY</small>
+    </span>
+  </a>
+  <p>IBDP Psychology SL · First assessment 2027</p>
+  <p class="disclaimer">Independent student revision resource.
+    Not affiliated with or endorsed by the International Baccalaureate.
+    Always check the current IB guide and your teacher's instructions.</p>
 </footer>
-<script src="script.js"></script>
+
 </body>
 </html>
