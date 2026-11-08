@@ -1,5 +1,5 @@
 /* Lin — server-side core. Runs ONLY on the server (Vercel function in api/lin.js, or server.js locally).
-   The Anthropic API key is read from process.env.ANTHROPIC_API_KEY and never sent to the browser.
+   The API key (GEMINI_API_KEY or ANTHROPIC_API_KEY) is read from the environment and never sent to the browser.
 
    Actions (POST /api/lin, JSON body { action, ... }):
      status      → { configured, model }                         (no key needed)
@@ -12,9 +12,28 @@
 'use strict';
 const R = require('./retrieval');
 
-const API_URL = (process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/$/, '') + '/v1/messages';
-const DEFAULT_MODEL = 'claude-sonnet-4-5';
-const model = () => (process.env.ANTHROPIC_MODEL || DEFAULT_MODEL).trim();
+/* ---------------------------------------------------------------- provider selection
+   Lin works with EITHER Google Gemini OR Anthropic Claude:
+     GEMINI_API_KEY=...      → Gemini   (model: GEMINI_MODEL, default gemini-2.5-flash)
+     ANTHROPIC_API_KEY=...   → Claude   (model: ANTHROPIC_MODEL, default claude-sonnet-4-5)
+   If both are set, LIN_PROVIDER=gemini|anthropic chooses. A Gemini key (starts with "AIza")
+   pasted into ANTHROPIC_API_KEY by mistake is detected and used with Gemini automatically. */
+const env = k => (process.env[k] || '').trim();
+function provider() {
+  const forced = env('LIN_PROVIDER').toLowerCase();
+  const gem = env('GEMINI_API_KEY') || env('GOOGLE_API_KEY');
+  const ant = env('ANTHROPIC_API_KEY');
+  if (forced === 'gemini' && (gem || ant.startsWith('AIza'))) return { name: 'gemini', key: gem || ant };
+  if (forced === 'anthropic' && ant && !ant.startsWith('AIza')) return { name: 'anthropic', key: ant };
+  if (gem) return { name: 'gemini', key: gem };
+  if (ant.startsWith('AIza')) return { name: 'gemini', key: ant };
+  if (ant) return { name: 'anthropic', key: ant };
+  return null;
+}
+function model() {
+  const p = provider();
+  return p && p.name === 'gemini' ? (env('GEMINI_MODEL') || 'gemini-2.5-flash') : (env('ANTHROPIC_MODEL') || 'claude-sonnet-4-5');
+}
 const UNITS = R.UNITS;
 const UNIT_LIST = UNITS.map(u => `${u} (${R.UNIT_NAMES[u]})`).join(', ');
 
@@ -22,27 +41,36 @@ class LinError extends Error {
   constructor(status, message) { super(message); this.status = status; }
 }
 
-/* ---------------------------------------------------------------- Anthropic call */
-async function callClaude({ system, messages, tools, toolChoice, maxTokens = 1500, temperature }) {
-  const key = (process.env.ANTHROPIC_API_KEY || '').trim();
-  if (!key) throw new LinError(503, 'Lin is not configured yet: set ANTHROPIC_API_KEY in your .env file (local) or in your hosting provider\'s environment variables, then restart the server.');
-  const body = { model: model(), max_tokens: maxTokens, system, messages };
-  if (tools) body.tools = tools;
-  if (toolChoice) body.tool_choice = toolChoice;
-  if (temperature !== undefined) body.temperature = temperature;
+/* ---------------------------------------------------------------- model call
+   Every caller uses Anthropic's message format ({system, messages, tools, toolChoice} in,
+   {content:[text|tool_use blocks], stop_reason} out). For Gemini the request and response are
+   translated, so tutoring, flashcards, exams and grading behave identically on both providers. */
+async function callClaude(opts) {
+  const p = provider();
+  if (!p) throw new LinError(503, 'Lin is not configured yet: put your API key in GEMINI_API_KEY (Google Gemini) or ANTHROPIC_API_KEY (Claude) in your .env file (local) or your hosting provider\'s environment variables, then restart the server.');
+  return p.name === 'gemini' ? callGemini(opts, p.key) : callAnthropic(opts, p.key);
+}
+
+async function postJSON(url, headers, body) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), Number(process.env.LIN_TIMEOUT_MS || 90000));
   let res;
   try {
-    res = await fetch(API_URL, {
-      method: 'POST', signal: controller.signal,
-      headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify(body)
-    });
+    res = await fetch(url, { method: 'POST', signal: controller.signal, headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body) });
   } catch (err) {
     throw new LinError(504, err.name === 'AbortError' ? 'The AI service took too long to respond. Please try again.' : 'Could not reach the AI service. Check your internet connection and try again.');
   } finally { clearTimeout(timer); }
   const data = await res.json().catch(() => ({}));
+  return { res, data };
+}
+
+async function callAnthropic({ system, messages, tools, toolChoice, maxTokens = 1500, temperature }, key) {
+  const url = (process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/$/, '') + '/v1/messages';
+  const body = { model: model(), max_tokens: maxTokens, system, messages };
+  if (tools) body.tools = tools;
+  if (toolChoice) body.tool_choice = toolChoice;
+  if (temperature !== undefined) body.temperature = temperature;
+  const { res, data } = await postJSON(url, { 'x-api-key': key, 'anthropic-version': '2023-06-01' }, body);
   if (!res.ok) {
     const detail = data?.error?.message || res.statusText;
     if (res.status === 401) throw new LinError(502, 'The Anthropic API key was rejected. Check ANTHROPIC_API_KEY in your environment.');
@@ -52,6 +80,68 @@ async function callClaude({ system, messages, tools, toolChoice, maxTokens = 150
     throw new LinError(502, `AI request failed: ${detail}`);
   }
   return data;
+}
+
+// Gemini's function-declaration schema uses upper-case OpenAPI types and a subset of keywords.
+function toGeminiSchema(schema) {
+  if (!schema || typeof schema !== 'object') return schema;
+  const out = {};
+  for (const [k, v] of Object.entries(schema)) {
+    if (k === 'type') out.type = String(v).toUpperCase();
+    else if (k === 'properties') out.properties = Object.fromEntries(Object.entries(v).map(([pk, pv]) => [pk, toGeminiSchema(pv)]));
+    else if (k === 'items') out.items = toGeminiSchema(v);
+    else if (['description', 'enum', 'required', 'minimum', 'maximum', 'nullable', 'format'].includes(k)) out[k] = v;
+  }
+  return out;
+}
+
+async function callGemini({ system, messages, tools, toolChoice, maxTokens = 1500, temperature }, key) {
+  const base = (process.env.GEMINI_BASE_URL || 'https://generativelanguage.googleapis.com').replace(/\/$/, '');
+  const url = `${base}/v1beta/models/${encodeURIComponent(model())}:generateContent`;
+  const toolNames = {}; // tool_use_id → function name (Gemini answers functions by name)
+  const contents = messages.map(m => {
+    const role = m.role === 'assistant' ? 'model' : 'user';
+    if (typeof m.content === 'string') return { role, parts: [{ text: m.content }] };
+    const parts = [];
+    for (const b of m.content) {
+      if (b.type === 'text' && b.text) parts.push({ text: b.text });
+      else if (b.type === 'tool_use') { toolNames[b.id] = b.name; parts.push(b._geminiPart || { functionCall: { name: b.name, args: b.input || {} } }); }
+      else if (b.type === 'tool_result') parts.push({ functionResponse: { name: toolNames[b.tool_use_id] || 'tool', response: { content: typeof b.content === 'string' ? b.content : JSON.stringify(b.content) } } });
+    }
+    return { role, parts: parts.length ? parts : [{ text: '' }] };
+  });
+  const body = {
+    systemInstruction: { parts: [{ text: system }] },
+    contents,
+    // Gemini 2.5 models count their internal "thinking" against the output limit, so allow headroom.
+    generationConfig: { maxOutputTokens: Math.min(65536, Math.max(8192, maxTokens * 4)), ...(temperature !== undefined ? { temperature } : {}) }
+  };
+  if (tools) body.tools = [{ functionDeclarations: tools.map(t => ({ name: t.name, description: t.description, parameters: toGeminiSchema(t.input_schema) })) }];
+  if (toolChoice && toolChoice.type === 'tool') body.toolConfig = { functionCallingConfig: { mode: 'ANY', allowedFunctionNames: [toolChoice.name] } };
+
+  const { res, data } = await postJSON(url, { 'x-goog-api-key': key }, body);
+  if (!res.ok) {
+    const detail = data?.error?.message || res.statusText;
+    if (/API key not valid|API_KEY_INVALID/i.test(detail) || res.status === 401) throw new LinError(502, 'The Gemini API key was rejected. Check GEMINI_API_KEY in your environment.');
+    if (res.status === 403) throw new LinError(502, `Gemini refused the request (permission): ${detail}`);
+    if (res.status === 404) throw new LinError(502, `The Gemini model "${model()}" is not available to this key. Set GEMINI_MODEL to a model your key can use (e.g. gemini-2.5-flash).`);
+    if (res.status === 429) throw new LinError(429, 'Your Gemini quota or rate limit was reached. Wait a moment (or check your quota in Google AI Studio) and try again.');
+    if (res.status >= 500) throw new LinError(503, 'The AI service is temporarily overloaded. Please try again shortly.');
+    throw new LinError(502, `AI request failed: ${detail}`);
+  }
+  const cand = (data.candidates || [])[0];
+  if (!cand) {
+    const why = data.promptFeedback?.blockReason;
+    throw new LinError(502, why ? `Gemini declined to answer (${why}). Try rephrasing.` : 'Gemini returned no answer. Please try again.');
+  }
+  const content = [];
+  for (const part of cand.content?.parts || []) {
+    if (part.thought) continue;
+    if (part.functionCall) content.push({ type: 'tool_use', id: `gm_${content.length}_${Date.now().toString(36)}`, name: part.functionCall.name, input: part.functionCall.args || {}, _geminiPart: part });
+    else if (typeof part.text === 'string' && part.text) content.push({ type: 'text', text: part.text });
+  }
+  const hasCall = content.some(b => b.type === 'tool_use');
+  return { content, stop_reason: hasCall ? 'tool_use' : cand.finishReason === 'MAX_TOKENS' ? 'max_tokens' : 'end_turn' };
 }
 
 /** Force the model to answer through one tool and return that tool's validated input. */
@@ -452,7 +542,7 @@ ${R.formatForPrompt(material, 12000)}`
 async function handleLinRequest(body) {
   if (!body || typeof body !== 'object') throw new LinError(400, 'Invalid request.');
   switch (body.action) {
-    case 'status': return { configured: Boolean((process.env.ANTHROPIC_API_KEY || '').trim()), model: model(), chunks: R.chunkCount };
+    case 'status': { const p = provider(); return { configured: Boolean(p), provider: p ? p.name : null, model: model(), chunks: R.chunkCount }; }
     case 'search': return { results: R.search(str(body.query, 300), { unit: validUnit(body.unit) || undefined, limit: clampInt(body.limit, 1, 20, 8) }) };
     case 'chat': return chat(body);
     case 'flashcards': return flashcards(body);
