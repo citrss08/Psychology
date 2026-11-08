@@ -16,17 +16,18 @@ const R = require('./retrieval');
    Lin works with EITHER Google Gemini OR Anthropic Claude:
      GEMINI_API_KEY=...      → Gemini   (model: GEMINI_MODEL, default gemini-2.5-flash)
      ANTHROPIC_API_KEY=...   → Claude   (model: ANTHROPIC_MODEL, default claude-sonnet-4-5)
-   If both are set, LIN_PROVIDER=gemini|anthropic chooses. A Gemini key (starts with "AIza")
+   If both are set, LIN_PROVIDER=gemini|anthropic chooses. A Gemini key (starts with "AIza" or "AQ.")
    pasted into ANTHROPIC_API_KEY by mistake is detected and used with Gemini automatically. */
 const env = k => (process.env[k] || '').trim();
 function provider() {
   const forced = env('LIN_PROVIDER').toLowerCase();
   const gem = env('GEMINI_API_KEY') || env('GOOGLE_API_KEY');
   const ant = env('ANTHROPIC_API_KEY');
-  if (forced === 'gemini' && (gem || ant.startsWith('AIza'))) return { name: 'gemini', key: gem || ant };
-  if (forced === 'anthropic' && ant && !ant.startsWith('AIza')) return { name: 'anthropic', key: ant };
+  const looksGoogle = k => /^(AIza|AQ\.)/.test(k); // Google keys: classic "AIza…" or newer "AQ.…"
+  if (forced === 'gemini' && (gem || looksGoogle(ant))) return { name: 'gemini', key: gem || ant };
+  if (forced === 'anthropic' && ant && !looksGoogle(ant)) return { name: 'anthropic', key: ant };
   if (gem) return { name: 'gemini', key: gem };
-  if (ant.startsWith('AIza')) return { name: 'gemini', key: ant };
+  if (looksGoogle(ant)) return { name: 'gemini', key: ant };
   if (ant) return { name: 'anthropic', key: ant };
   return null;
 }
