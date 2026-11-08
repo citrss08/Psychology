@@ -11,6 +11,14 @@
      grade       → marks, feedback, model answers and weaknesses for a submitted exam */
 'use strict';
 const R = require('./retrieval');
+const { AsyncLocalStorage } = require('async_hooks');
+
+/* Every request gets a hard time budget. On Vercel a function is killed after 60 s and the browser then
+   receives plain text instead of JSON ("server isn't reachable"), so Lin always answers (or fails with a
+   clear message) before that. Locally there is no such limit. */
+const budgetStore = new AsyncLocalStorage();
+const BUDGET_MS = () => Number(process.env.LIN_BUDGET_MS || (process.env.VERCEL ? 52000 : 150000));
+const remainingMs = () => { const st = budgetStore.getStore(); return st ? st.deadline - Date.now() : 90000; };
 
 /* ---------------------------------------------------------------- provider selection
    Lin works with EITHER Google Gemini OR Anthropic Claude:
@@ -31,9 +39,10 @@ function provider() {
   if (ant) return { name: 'anthropic', key: ant };
   return null;
 }
+let autoGeminiModel = null; // discovered from Google's model list when the default isn't available
 function model() {
   const p = provider();
-  return p && p.name === 'gemini' ? (env('GEMINI_MODEL') || 'gemini-2.5-flash') : (env('ANTHROPIC_MODEL') || 'claude-sonnet-4-5');
+  return p && p.name === 'gemini' ? (env('GEMINI_MODEL') || autoGeminiModel || 'gemini-2.5-flash') : (env('ANTHROPIC_MODEL') || 'claude-sonnet-4-5');
 }
 const UNITS = R.UNITS;
 const UNIT_LIST = UNITS.map(u => `${u} (${R.UNIT_NAMES[u]})`).join(', ');
@@ -52,9 +61,9 @@ async function callClaude(opts) {
   return p.name === 'gemini' ? callGemini(opts, p.key) : callAnthropic(opts, p.key);
 }
 
-async function postJSON(url, headers, body) {
+async function postJSON(url, headers, body, timeoutMs) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), Number(process.env.LIN_TIMEOUT_MS || 90000));
+  const timer = setTimeout(() => controller.abort(), Math.max(1000, timeoutMs || Number(process.env.LIN_TIMEOUT_MS || 90000)));
   let res;
   try {
     res = await fetch(url, { method: 'POST', signal: controller.signal, headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body) });
@@ -71,7 +80,7 @@ async function callAnthropic({ system, messages, tools, toolChoice, maxTokens = 
   if (tools) body.tools = tools;
   if (toolChoice) body.tool_choice = toolChoice;
   if (temperature !== undefined) body.temperature = temperature;
-  const { res, data } = await postJSON(url, { 'x-api-key': key, 'anthropic-version': '2023-06-01' }, body);
+  const { res, data } = await postJSON(url, { 'x-api-key': key, 'anthropic-version': '2023-06-01' }, body, Math.max(4000, remainingMs() - 1500));
   if (!res.ok) {
     const detail = data?.error?.message || res.statusText;
     if (res.status === 401) throw new LinError(502, 'The Anthropic API key was rejected. Check ANTHROPIC_API_KEY in your environment.');
@@ -81,6 +90,42 @@ async function callAnthropic({ system, messages, tools, toolChoice, maxTokens = 
     throw new LinError(502, `AI request failed: ${detail}`);
   }
   return data;
+}
+
+/** Models this key can call for text, best first: newest stable "flash" (fast + cheap), then pro, then others. */
+async function listGeminiModels(base, key) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 6000);
+  try {
+    const res = await fetch(`${base}/v1beta/models?pageSize=200`, { headers: { 'x-goog-api-key': key }, signal: controller.signal });
+    if (!res.ok) return [];
+    const data = await res.json();
+    const names = (data.models || [])
+      .filter(m => (m.supportedGenerationMethods || []).includes('generateContent'))
+      .map(m => String(m.name || '').replace(/^models\//, ''))
+      .filter(n => n.startsWith('gemini') && !/(image|tts|audio|live|embedding|vision|robotics|computer-use|native)/.test(n));
+    const version = n => parseFloat((n.match(/gemini-(\d+(?:\.\d+)?)/) || [])[1] || 0);
+    const rank = n => (/flash/.test(n) ? 2 : /pro/.test(n) ? 1 : 0) * 100 + version(n) * 10 - (/(preview|exp)/.test(n) ? 8 : 0) - (/lite/.test(n) ? 3 : 0);
+    return names.sort((a, b) => rank(b) - rank(a));
+  } catch { return []; } finally { clearTimeout(timer); }
+}
+
+// Models that just failed (overloaded, timed out…) are skipped for a few minutes so Lin stays fast.
+const badModels = new Map();
+const markBad = name => badModels.set(name, Date.now() + 3 * 60 * 1000);
+let modelListCache = { at: 0, names: [] };
+async function geminiOrder(base, key) {
+  const forced = env('GEMINI_MODEL');
+  if (forced) return [forced];
+  if (!modelListCache.names.length || Date.now() - modelListCache.at > 10 * 60 * 1000) {
+    const names = await listGeminiModels(base, key);
+    if (names.length) modelListCache = { at: Date.now(), names };
+  }
+  const names = modelListCache.names.length ? modelListCache.names : ['gemini-2.5-flash', 'gemini-2.0-flash'];
+  const isBad = n => (badModels.get(n) || 0) > Date.now();
+  const ordered = [...names.filter(n => !isBad(n)), ...names.filter(isBad)];
+  if (autoGeminiModel && !isBad(autoGeminiModel)) ordered.unshift(autoGeminiModel);
+  return [...new Set(ordered)];
 }
 
 // Gemini's function-declaration schema uses upper-case OpenAPI types and a subset of keywords.
@@ -96,9 +141,9 @@ function toGeminiSchema(schema) {
   return out;
 }
 
-async function callGemini({ system, messages, tools, toolChoice, maxTokens = 1500, temperature }, key) {
+async function callGemini(opts, key) {
+  const { system, messages, tools, toolChoice, maxTokens = 1500, temperature } = opts;
   const base = (process.env.GEMINI_BASE_URL || 'https://generativelanguage.googleapis.com').replace(/\/$/, '');
-  const url = `${base}/v1beta/models/${encodeURIComponent(model())}:generateContent`;
   const toolNames = {}; // tool_use_id → function name (Gemini answers functions by name)
   const contents = messages.map(m => {
     const role = m.role === 'assistant' ? 'model' : 'user';
@@ -120,14 +165,35 @@ async function callGemini({ system, messages, tools, toolChoice, maxTokens = 150
   if (tools) body.tools = [{ functionDeclarations: tools.map(t => ({ name: t.name, description: t.description, parameters: toGeminiSchema(t.input_schema) })) }];
   if (toolChoice && toolChoice.type === 'tool') body.toolConfig = { functionCallingConfig: { mode: 'ANY', allowedFunctionNames: [toolChoice.name] } };
 
-  const { res, data } = await postJSON(url, { 'x-goog-api-key': key }, body);
+  // Try the best available model; if it is overloaded / slow / missing, move on to the next one.
+  const order = (await geminiOrder(base, key)).slice(0, 4);
+  let res = null, data = null, lastStatus = 0, lastDetail = '', timedOut = false;
+  for (let i = 0; i < order.length; i++) {
+    const name = order[i];
+    const left = remainingMs() - 1500;
+    if (left < 4000) { timedOut = true; break; }
+    const isLast = i === order.length - 1;
+    const timeout = isLast ? left : Math.min(left, Math.max(12000, left * 0.7));
+    let r;
+    try {
+      r = await postJSON(`${base}/v1beta/models/${encodeURIComponent(name)}:generateContent`, { 'x-goog-api-key': key }, body, timeout);
+    } catch (err) { timedOut = true; markBad(name); console.warn(`[lin] model ${name}: no answer within ${Math.round(timeout / 1000)}s`); continue; }
+    if (r.res.ok) { res = r.res; data = r.data; autoGeminiModel = name; break; }
+    lastStatus = r.res.status; lastDetail = r.data?.error?.message || r.res.statusText;
+    console.warn(`[lin] model ${name} failed: ${lastStatus} ${lastDetail}`);
+    if (lastStatus !== 404 && lastStatus !== 429 && lastStatus < 500) { res = r.res; data = r.data; break; } // key/request problem, not the model
+    markBad(name);
+  }
+  if (!res) {
+    if (lastStatus === 429) throw new LinError(429, 'Your Gemini quota or rate limit was reached. Wait a moment (or check your quota in Google AI Studio) and try again.');
+    if (lastStatus === 404 && !timedOut) throw new LinError(502, `None of the Gemini models are available to this key (${lastDetail}). Set GEMINI_MODEL to a model listed in Google AI Studio.`);
+    if (lastStatus >= 500) throw new LinError(503, `Google's Gemini is overloaded or having problems right now (${lastStatus}: ${lastDetail}). Please try again in a minute.`);
+    throw new LinError(504, 'Gemini took too long to answer (it is probably busy). Please try again in a moment.');
+  }
   if (!res.ok) {
     const detail = data?.error?.message || res.statusText;
     if (/API key not valid|API_KEY_INVALID/i.test(detail) || res.status === 401) throw new LinError(502, 'The Gemini API key was rejected. Check GEMINI_API_KEY in your environment.');
     if (res.status === 403) throw new LinError(502, `Gemini refused the request (permission): ${detail}`);
-    if (res.status === 404) throw new LinError(502, `The Gemini model "${model()}" is not available to this key. Set GEMINI_MODEL to a model your key can use (e.g. gemini-2.5-flash).`);
-    if (res.status === 429) throw new LinError(429, 'Your Gemini quota or rate limit was reached. Wait a moment (or check your quota in Google AI Studio) and try again.');
-    if (res.status >= 500) throw new LinError(503, 'The AI service is temporarily overloaded. Please try again shortly.');
     throw new LinError(502, `AI request failed: ${detail}`);
   }
   const cand = (data.candidates || [])[0];
@@ -573,12 +639,17 @@ async function respond(req, rawBody) {
   catch { return { status: 400, json: { error: 'Invalid JSON.' } }; }
   const ip = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'local').split(',')[0].trim();
   if (rateLimited(ip, body.action)) return { status: 429, json: { error: 'You\'ve sent a lot of requests in a short time. Take a short break and try again in a few minutes.' } };
-  try { return { status: 200, json: await handleLinRequest(body) }; }
+  let guardTimer;
+  try {
+    const work = budgetStore.run({ deadline: Date.now() + BUDGET_MS() }, () => handleLinRequest(body));
+    const guard = new Promise((_, reject) => { guardTimer = setTimeout(() => reject(new LinError(504, 'Lin took too long to answer. Please try again — shorter requests (fewer questions or cards) are faster.')), BUDGET_MS() + 2500); });
+    return { status: 200, json: await Promise.race([work, guard]) };
+  }
   catch (err) {
     if (err instanceof LinError) return { status: err.status, json: { error: err.message } };
     console.error('[lin] unexpected error:', err);
     return { status: 500, json: { error: 'Something went wrong inside Lin. Please try again.' } };
-  }
+  } finally { clearTimeout(guardTimer); }
 }
 
 module.exports = { handleLinRequest, respond, LinError };
