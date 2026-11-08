@@ -1,6 +1,3 @@
-
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="lin.css">
+  <script src="content.js" defer></script>
   <script src="script.js" defer></script>
+  <script src="lin.js" defer></script>
 </head>
 <body>
   <header class="topbar">
@@ -20,7 +20,7 @@
       <span class="brand-mark">Ψ</span>
       <span class="brand-name">PSYCHOLOGY <small>IB DIPLOMA · SL 2027</small></span>
     </a>
-    <div class="topbar-right"><span class="top-label">FIRST ASSESSMENT 2027</span><span class="top-dot"></span><span class="top-label">STUDY EDITION</span></div>
+    <div class="topbar-right"><span class="top-label">FIRST ASSESSMENT 2027</span><span class="top-dot"></span><span class="top-label">STUDY EDITION</span><a class="top-lab-link" href="#study-lab">Study Lab</a><button class="ask-lin-button" id="ask-lin" type="button" aria-label="Open Lin, your AI psychology tutor (Alt+L)"><span class="lin-avatar-mini">L</span>Ask Lin</button></div>
   </header>
   <main id="home">
     <section class="hero">
@@ -60,6 +60,18 @@
       <div id="unit-content" class="unit-content" aria-live="polite"></div>
     </section>
 
+    <section class="lab-section" id="study-lab">
+      <div class="section-heading"><div><p class="eyebrow">STUDY LAB · POWERED BY LIN</p><h2>Practise what you've learned</h2><p>Flashcards and mock examinations generated from the notes on this site, graded by Lin, saved in this browser for your next session.</p></div><div class="course-note"><span class="note-dot"></span> Built from your notebook</div></div>
+      <div class="tab-bar lab-tabs" role="tablist" aria-label="Study Lab tools">
+        <button class="lab-tab active" data-lab="flashcards" role="tab" aria-selected="true">Flashcards</button>
+        <button class="lab-tab" data-lab="exams" role="tab" aria-selected="false">Mock exams</button>
+        <button class="lab-tab" data-lab="progress" role="tab" aria-selected="false">Progress</button>
+      </div>
+      <div class="lab-panel" id="lab-flashcards" role="tabpanel"></div>
+      <div class="lab-panel" id="lab-exams" role="tabpanel" hidden></div>
+      <div class="lab-panel" id="lab-progress" role="tabpanel" hidden></div>
+    </section>
+
     <section class="glossary-section" id="glossary">
       <div class="section-heading"><div><p class="eyebrow">THE COURSE DICTIONARY</p><h2>Search the key terms</h2><p>Definitions collected from the key-term lists at the ends of your class PDFs, explained in clear revision language.</p></div></div>
       <div class="glossary-tools"><label class="search-box"><span>⌕</span><input id="glossary-search" type="search" placeholder="Search a word or definition..." aria-label="Search glossary"></label><select id="glossary-unit" aria-label="Filter glossary by unit"><option value="all">All five units</option><option value="investigations">Psychological investigations</option><option value="health">Health and well-being</option><option value="development">Human development</option><option value="relationships">Human relationships</option><option value="learning">Learning and cognition</option></select></div>
@@ -92,5 +104,3 @@
   </main>
 </body>
 </html>
-```
-

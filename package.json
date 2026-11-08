@@ -1,0 +1,13 @@
+{
+  "name": "psychology-sl-study-platform",
+  "version": "1.1.0",
+  "private": true,
+  "description": "IB Psychology SL 2027 digital notebook with Lin, an AI tutor (chat, flashcards, mock exams).",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
