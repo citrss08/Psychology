@@ -1,5 +1,5 @@
 /* Local development server for the Psychology SL study platform + Lin.
-   Usage:  1) copy .env.example to .env and paste your key into ANTHROPIC_API_KEY
+   Usage:  1) copy .env.example to .env and paste your key into GEMINI_API_KEY (or ANTHROPIC_API_KEY)
            2) npm start   (or: node server.js)
            3) open http://localhost:3000
    No dependencies: serves the static site and the /api/lin endpoint with Node's built-in http module. */
@@ -18,7 +18,7 @@ if (fs.existsSync(envFile)) {
     if (process.env[m[1]] === undefined) process.env[m[1]] = value;
   }
 }
-const { respond } = require('./server/lin-core');
+const { respond, handleLinRequest } = require('./server/lin-core');
 
 const ROOT = __dirname;
 const PUBLIC = new Set(['index.html', 'styles.css', 'script.js', 'content.js', 'lin.css', 'lin.js']);
@@ -48,8 +48,8 @@ const server = http.createServer(async (req, res) => {
 
 const PORT = Number(process.env.PORT || 3000);
 server.listen(PORT, () => {
-  const ok = Boolean((process.env.ANTHROPIC_API_KEY || '').trim());
   console.log(`Psychology SL study platform → http://localhost:${PORT}`);
-  console.log(ok ? `Lin is ready (model: ${process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5'}).`
-                 : 'Lin is NOT configured: copy .env.example to .env and set ANTHROPIC_API_KEY, then restart.');
+  handleLinRequest({ action: 'status' }).then(s => console.log(s.configured
+    ? `Lin is ready (provider: ${s.provider}, model: ${s.model}).`
+    : 'Lin is NOT configured: copy .env.example to .env and set GEMINI_API_KEY (or ANTHROPIC_API_KEY), then restart.'));
 });

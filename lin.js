@@ -202,7 +202,7 @@ function setState(state) {
 function checkStatus() {
   if (statusChecked) return; statusChecked = true;
   api('status').then(s => {
-    if (!s.configured) showNotice('Lin isn\'t connected to the AI yet. Add your key to <code>ANTHROPIC_API_KEY</code> in the <code>.env</code> file (or your Vercel environment variables) and restart the server.');
+    if (!s.configured) showNotice('Lin isn\'t connected to the AI yet. Add your key to <code>GEMINI_API_KEY</code> (or <code>ANTHROPIC_API_KEY</code>) in the <code>.env</code> file (or your Vercel environment variables) and restart the server.');
   }).catch(err => showNotice(h(err.message).replace(/`([^`]+)`/g, '<code>$1</code>')));
 }
 function showNotice(html) { const n = qs('#lin-notice'); n.innerHTML = html; n.hidden = false; }
