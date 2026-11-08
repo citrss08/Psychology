@@ -1,0 +1,5 @@
+{
+  "functions": {
+    "api/lin.js": { "maxDuration": 60 }
+  }
+}
