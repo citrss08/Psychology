@@ -42,7 +42,11 @@ async function api(action, payload = {}) {
   } catch { throw new Error(SERVER_MISSING); }
   let data = null;
   try { data = await res.json(); } catch { /* not JSON → probably static hosting */ }
-  if (!data) throw new Error(SERVER_MISSING);
+  if (!data) {
+    // 5xx with no JSON = the server exists but crashed or timed out; anything else = no server (e.g. static hosting).
+    if (res.status >= 500) throw new Error(`Lin's server took too long or hit an error (${res.status}). Please try again in a moment.`);
+    throw new Error(SERVER_MISSING);
+  }
   if (!res.ok) throw new Error(data.error || `Request failed (${res.status}).`);
   return data;
 }
